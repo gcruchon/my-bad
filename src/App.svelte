@@ -9,6 +9,9 @@
 
   import firebaseConfig from "./config/firebaseConfig";
 
+  import ShowUser from "./components/user/ShowUser.svelte"
+  import SignIn from "./components/user/SignIn.svelte"
+
   firebase.initializeApp(firebaseConfig);
   const nanoid = customAlphabet("1234567890ABCDEFGHJKLMNPQRSTUVWYZ", 8);
 </script>
@@ -52,15 +55,10 @@
 
     <!-- 2. 😀 Get the current user -->
     <User let:user let:auth>
-      Salut 😀! Utilisateur
-      <em>{user.uid}</em>
-
-      <button on:click={() => auth.signOut()}>Se déconnecter</button>
-
+      <ShowUser user={user} auth={auth}/>
+      
       <div slot="signed-out">
-        <button on:click={() => auth.signInAnonymously()}>
-          Se connecter en anonyme
-        </button>
+        <SignIn auth={auth}/>
       </div>
 
       <hr />
