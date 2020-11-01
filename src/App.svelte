@@ -1,6 +1,6 @@
 <script>
   import { FirebaseApp, User, Doc, Collection } from "sveltefire";
-
+  import { customAlphabet } from "nanoid/non-secure";
   import firebase from "firebase/app";
   import "firebase/firestore";
   import "firebase/auth";
@@ -10,6 +10,7 @@
   import firebaseConfig from "./config/firebaseConfig";
 
   firebase.initializeApp(firebaseConfig);
+  const nanoid = customAlphabet("1234567890ABCDEFGHJKLMNPQRSTUVWYZ", 8);
 </script>
 
 <!-- Styles -->
@@ -41,89 +42,141 @@
 
 <main>
   {#if !firebaseConfig.projectId}
-    <strong>Step 0</strong>
-    Create a
-    <a href="https://firebase.google.com/">Firebase Project</a>
-    and paste your web config into
-    <code>App.svelte</code>
+    <strong>Please check your config...</strong>
     .
   {/if}
 
   <!-- 1. 🔥 Firebase App -->
   <FirebaseApp {firebase}>
-    <h1>💪🔥 Mode Activated</h1>
-
-    <p>
-      <strong>Tip:</strong>
-      Open the browser console for development logging.
-    </p>
+    <h1>My bad! 😅</h1>
 
     <!-- 2. 😀 Get the current user -->
     <User let:user let:auth>
-      Howdy 😀! User
+      Salut 😀! Utilisateur
       <em>{user.uid}</em>
 
-      <button on:click={() => auth.signOut()}>Sign Out</button>
+      <button on:click={() => auth.signOut()}>Se déconnecter</button>
 
       <div slot="signed-out">
         <button on:click={() => auth.signInAnonymously()}>
-          Sign In Anonymously
+          Se connecter en anonyme
         </button>
       </div>
 
       <hr />
 
       <!-- 3. 📜 Get a Firestore document owned by a user -->
-      <Doc path={`posts/${user.uid}`} let:data={post} let:ref={postRef} log>
-        <h2>{post.title}</h2>
+      <Doc path={`games/${user.uid}`} let:data={game} let:ref={gameRef} log>
+        <h2>ID du jeu : {game.id}</h2>
 
         <p>
-          Document created at
-          <em>{new Date(post.createdAt).toLocaleString()}</em>
+          Jeu commencé le
+          <em>{new Date(game.createdAt).toLocaleString()}</em>
         </p>
 
-        <span slot="loading">Loading post...</span>
+        <span slot="loading">Loading game...</span>
         <span slot="fallback">
           <button
-            on:click={() => postRef.set({
-                title: '📜 I like Svelte',
+            on:click={() => gameRef.set({
+                id: nanoid(),
+                state: 'waitingForPlayers',
+                currentQuestionIndex: 0,
+                questions: [1, 2, 3, 4, 5, 6],
                 createdAt: Date.now(),
               })}>
-            Create Document
+            Initier un tour!
           </button>
         </span>
 
-        <!-- 4. 💬 Get all the comments in its subcollection -->
+        <!-- WAITING FOR PLAYERS -->
+        {#if game.state === 'waitingForPlayers'}
+          <h3>Players</h3>
+          <Collection
+            path={gameRef.collection('players')}
+            query={(ref) => ref.orderBy('createdAt')}
+            let:data={players}
+            let:ref={playersRef}
+            log>
+            {#if !players.length}En attente des joueurs...{/if}
 
-        <h3>Comments</h3>
-        <Collection
-          path={postRef.collection('comments')}
-          query={(ref) => ref.orderBy('createdAt')}
-          let:data={comments}
-          let:ref={commentsRef}
-          log>
-          {#if !comments.length}No comments yet...{/if}
+            {#each players as player}
+              <p>
+                <!-- ID: <em>{comment.ref.id}</em> -->
+              </p>
+              <p>
+                {player.name}
+                <button on:click={() => player.ref.delete()}>Supprimer</button>
+              </p>
+            {/each}
 
-          {#each comments as comment}
-            <p>
-              <!-- ID: <em>{comment.ref.id}</em> -->
-            </p>
-            <p>
-              {comment.text}
-              <button on:click={() => comment.ref.delete()}>Delete</button>
-            </p>
-          {/each}
+            <button
+              on:click={() => playersRef.add({
+                  name: 'Gilles',
+                  createdAt: Date.now(),
+                })}>
+              Ajouter un joueur
+            </button>
+            <button
+              on:click={() => gameRef.update({
+                state: 'preQuestion',
+                })}>
+              Commencer à jouer!
+            </button>
+            <span slot="loading">Chargement des joueurs...</span>
+          </Collection>
 
+        <!-- COUNTDOWN BEFORE QUESTION -->
+        {:else if game.state === 'preQuestion'}
+          <h3>preQuestion</h3>
+          <p>Question: {game.currentQuestionIndex + 1}</p>
           <button
-            on:click={() => commentsRef.add({
-                text: '💬 Me too!',
-                createdAt: Date.now(),
+            on:click={() => gameRef.update({
+              state: 'question',
               })}>
-            Add Comment
+            Lire la question!
           </button>
-
-          <span slot="loading">Loading comments...</span>
-        </Collection>
+        <!-- ASKING THE QUESTION -->
+        {:else if game.state === 'question'}
+          <h3>question</h3>
+          <p>Question: {game.currentQuestionIndex + 1}</p>
+          <button
+            on:click={() => gameRef.update({
+              state: 'showResults',
+              })}>
+            Stop!
+          </button>
+        <!-- SHOW WHAT PEOPLE ANSWERED -->
+        {:else if game.state === 'showResults'}
+          <h3>showResults</h3>
+          <p>Question: {game.currentQuestionIndex + 1}</p>
+          <button
+            on:click={() => gameRef.update({
+              state: 'showAnswer',
+              })}>
+            Voir la réponse!
+          </button>
+        <!-- SHOW THE ACTUAL CORRECT ANSWER -->
+        {:else if game.state === 'showAnswer'}
+          <h3>answer</h3>
+          <p>Question: {game.currentQuestionIndex + 1}</p>
+          <button
+            on:click={() => gameRef.update({
+              state: 'leaderboard',
+              })}>
+            Voir le classement!
+          </button>
+        <!-- SHOW THE LEADERBOARD -->
+        {:else if game.state === 'leaderboard'}
+          <h3>Classement</h3>
+          <p>Question: {game.currentQuestionIndex + 1}</p>
+          <button
+            on:click={() => gameRef.update({
+              state: 'preQuestion',
+              currentQuestionIndex: game.currentQuestionIndex + 1,
+              })}>
+            Prochaine question!
+          </button>
+        {/if}
       </Doc>
     </User>
   </FirebaseApp>
