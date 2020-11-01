@@ -8,7 +8,7 @@
 
 <button
 on:click={() => gameRef.set({
-    id: nanoid(),
+    shortId: nanoid(),
     state: 'waitingForPlayers',
     currentQuestionIndex: 0,
     questions: [1, 2, 3, 4, 5, 6],

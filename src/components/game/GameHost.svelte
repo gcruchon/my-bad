@@ -3,7 +3,7 @@
 
   import GameHeader from "./GameHeader.svelte";
   import GameStart from "./GameStart.svelte";
-  import GamePlayers from "./GamePlayers.svelte";
+  import GamePlayerList from "./GamePlayerList.svelte";
   import QuestionHeader from "../question/QuestionHeader.svelte";
   import QuestionCountDown from "../question/QuestionCountDown.svelte";
 
@@ -11,7 +11,7 @@
 </script>
 
 <Doc path={`games/${userId}`} let:data={game} let:ref={gameRef} log>
-  <GameHeader id={game.id} createdAt={game.createdAt} />
+  <GameHeader shortId={game.shortId} createdAt={game.createdAt} />
 
   <span slot="loading">Chargement du jeu...</span>
   <span slot="fallback">
@@ -20,7 +20,7 @@
 
   <!-- WAITING FOR PLAYERS -->
   {#if game.state === 'waitingForPlayers'}
-    <GamePlayers {gameRef} />
+    <GamePlayerList {gameRef} />
 
     <!-- COUNTDOWN BEFORE QUESTION -->
   {:else if game.state === 'preQuestion'}

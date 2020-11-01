@@ -1,5 +1,5 @@
 <script>
-  export let id;
+  export let shortId;
   export let createdAt;
 </script>
 
@@ -10,5 +10,5 @@
     }
 </style>
 
-<h2>ID du jeu : {id}</h2>
+<h2>ID du jeu : {shortId}</h2>
 <p class="started">Jeu commencé le <em>{new Date(createdAt).toLocaleString()}</em></p>

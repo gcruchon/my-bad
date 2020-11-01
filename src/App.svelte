@@ -11,10 +11,7 @@
   import ShowUser from "./components/user/ShowUser.svelte";
   import SignIn from "./components/user/SignIn.svelte";
   import GameHost from "./components/game/GameHost.svelte";
-  import GameStart from "./components/game/GameStart.svelte";
-  import GamePlayers from "./components/game/GamePlayers.svelte";
-  import QuestionHeader from "./components/question/QuestionHeader.svelte";
-  import QuestionCountDown from "./components/question/QuestionCountDown.svelte";
+  import PlayerHome from "./components/player/PlayerHome.svelte";
 
   firebase.initializeApp(firebaseConfig);
 
@@ -56,11 +53,9 @@
     <strong>Please check your config...</strong>
   {/if}
 
-  <!-- 1. 🔥 Firebase App -->
   <FirebaseApp {firebase}>
     <h1>My bad! 😅</h1>
 
-    <!-- 2. 😀 Get the current user -->
     <User let:user let:auth>
       <ShowUser {user} {auth} />
 
@@ -73,7 +68,7 @@
       {#if userType === 'host'}
         <GameHost userId={user.uid} />
       {:else if userType === 'player'}
-        <p>Player</p>
+        <PlayerHome userId={user.uid} />
       {:else}
         <h2>Que souhaitez-vous faire ?</h2>
 
@@ -94,7 +89,6 @@
           </button>
         </p>
       {/if}
-
     </User>
   </FirebaseApp>
 </main>
