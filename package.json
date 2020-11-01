@@ -1,0 +1,40 @@
+{
+  "name": "my-bad",
+  "version": "0.0.1",
+  "description": "Game to better understand the notion of error, mistake, failure.",
+  "main": "main.js",
+  "scripts": {
+    "build": "rollup -c",
+    "dev": "rollup -c -w",
+    "start": "sirv public",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gcruchon/my-bad.git"
+  },
+  "keywords": [
+    "game",
+    "error",
+    "mistake",
+    "failure"
+  ],
+  "author": "Gilles CRUCHON <gilles.cruchon@gmail.com>",
+  "license": "SEE LICENCE IN LICENSE",
+  "bugs": {
+    "url": "https://github.com/gcruchon/my-bad/issues"
+  },
+  "homepage": "https://github.com/gcruchon/my-bad#readme",
+  "devDependencies": {
+    "firebase": "^7.5.2",
+    "rollup": "^1.27.9",
+    "rollup-plugin-commonjs": "^10.0.0",
+    "rollup-plugin-livereload": "^1.0.0",
+    "rollup-plugin-node-resolve": "^5.2.0",
+    "rollup-plugin-svelte": "^5.0.3",
+    "rollup-plugin-terser": "^5.1.2",
+    "sirv-cli": "^0.4.4",
+    "svelte": "^3.16.3",
+    "sveltefire": "^0.1.1"
+  }
+}
