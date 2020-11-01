@@ -14,6 +14,7 @@
   import GameStart from "./components/game/GameStart.svelte"
   import GamePlayers from "./components/game/GamePlayers.svelte"
   import QuestionHeader from "./components/question/QuestionHeader.svelte"
+  import QuestionCountDown from "./components/question/QuestionCountDown.svelte"
 
   firebase.initializeApp(firebaseConfig);
 </script>
@@ -80,24 +81,13 @@
 
         <!-- COUNTDOWN BEFORE QUESTION -->
         {:else if game.state === 'preQuestion'}
-          <h3>preQuestion</h3>
           <QuestionHeader game={game} />
-          <button
-            on:click={() => gameRef.update({
-              state: 'question',
-              })}>
-            Lire la question!
-          </button>
+          <QuestionCountDown gameRef={gameRef} numberOfSeconds={5} nextState="question" />
         <!-- ASKING THE QUESTION -->
         {:else if game.state === 'question'}
-          <h3>question</h3>
           <QuestionHeader game={game} />
-          <button
-            on:click={() => gameRef.update({
-              state: 'showResults',
-              })}>
-            Stop!
-          </button>
+          <QuestionCountDown gameRef={gameRef} numberOfSeconds={30} nextState="showResults" />
+          <p>Texte de la question</p>
         <!-- SHOW WHAT PEOPLE ANSWERED -->
         {:else if game.state === 'showResults'}
           <h3>showResults</h3>
