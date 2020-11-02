@@ -28,6 +28,12 @@
   });
 </script>
 
+<style>
+  p {
+    text-align: center;
+  }
+</style>
+
 <p>
   Timer : {remaining} sec.
   <GameEndStep gameRef={gameRef} nextState={nextState} label={endStepLabel} />

@@ -26,7 +26,6 @@
   main {
     padding: 1em;
     max-width: 240px;
-    margin: 0 auto;
   }
 
   h1 {
@@ -34,16 +33,32 @@
     color: #ff3e00;
   }
 
-  hr {
-    height: 1px;
-    border: none;
-    background: rgb(195, 195, 195);
+  h2 {
+    text-align: center;
+  }
+
+  p {
+    text-align: center;
   }
 
   @media (min-width: 640px) {
     main {
       max-width: none;
     }
+  }
+
+
+  :global(.error) {
+    color:purple;
+    font-weight: bold;
+  }
+  :global(.mistake) {
+    color:orangered;
+    font-weight: bold;
+  }
+  :global(.failure) {
+    color:olive;
+    font-weight: bold;
   }
 </style>
 
@@ -61,8 +76,6 @@
       <div slot="signed-out">
         <SignIn {auth} />
       </div>
-
-      <hr />
 
       {#if userType === 'host'}
         <GameHost userId={user.uid} />

@@ -6,6 +6,12 @@
   const questionId = game.questions[game.currentQuestionIndex];
 </script>
 
+<style>
+  p {
+    text-align: center;
+  }
+</style>
+
 <Collection
   path={`games/${game.id}/players`}
   query={(ref) => ref.where('userId', '==', userId)}
@@ -27,48 +33,60 @@
       let:ref={answersRef}
       let:first={answer}
       log>
-      {#if answers.length == 0}
-        <p>Pour vous, c'est :</p>
-        <p>
-          <button
-            on:click={() => answersRef.add({
-                questionId: questionId,
-                value: 'error',
-                createdAt: Date.now(),
-              })}>
-            Une Erreur
-          </button>
-          <button
-            on:click={() => answersRef.add({
-                questionId: questionId,
-                value: 'mistake',
-                createdAt: Date.now(),
-              })}>
-            Une Faute
-          </button>
-          <button
-            on:click={() => answersRef.add({
-                questionId: questionId,
-                value: 'failure',
-                createdAt: Date.now(),
-              })}>
-            Un Echec
-          </button>
-        </p>
+      {#if answers.length === 0}
+        {#if game.state === 'question'}
+          <p>Pour vous, c'est :</p>
+          <p>
+            <button
+              on:click={() => answersRef.add({
+                  questionId: questionId,
+                  value: 'error',
+                  createdAt: Date.now(),
+                })}>
+              une
+              <span class="error">erreur</span>
+            </button>
+            <button
+              on:click={() => answersRef.add({
+                  questionId: questionId,
+                  value: 'mistake',
+                  createdAt: Date.now(),
+                })}>
+              une
+              <span class="mistake">faute</span>
+            </button>
+            <button
+              on:click={() => answersRef.add({
+                  questionId: questionId,
+                  value: 'failure',
+                  createdAt: Date.now(),
+                })}>
+              un
+              <span class="failure">échec</span>
+            </button>
+          </p>
+        {:else}
+          <p>Trop tard, vous n'avez pas répondu...</p>
+        {/if}
       {:else if answers.length > 1}
         <p>
           Nous avons trouvé plusieurs réponse pour cette question, c'est
           embarrassant...
         </p>
       {:else}
-        <p>Pour vous, c'est</p>
-        {#if answer.value === 'error'}
-          Une Erreur
-        {:else if answer.value === 'mistake'}
-          Une Faute
-        {:else if answer.value === 'failure'}
-          Un Echec
-        {:else}Réponse de type inconnu{/if}
+        <p>
+          Pour vous, c'est
+          {#if answer.value === 'error'}
+            une
+            <span class="error">erreur</span>
+          {:else if answer.value === 'mistake'}
+            une
+            <span class="mistake">faute</span>
+          {:else if answer.value === 'failure'}
+            un
+            <span class="failure">échec</span>
+          {:else}une réponse de type inconnu...{/if}
+        </p>
       {/if}
       <span slot="loading">Chargement en cours...</span>
     </Collection>

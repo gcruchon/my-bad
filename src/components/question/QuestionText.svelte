@@ -9,8 +9,38 @@
 </script>
 
 <style>
-  p.question {
-    text-align: left;
+  .situation {
+    background-color: rgb(227, 245, 251);
+    margin: 1em 0;
+    padding: 1em;
+  }
+  .situation p {
+    margin: 1em;
+  }
+  .situation .situation__title {
+    text-align: center;
+    font-weight: bold;
+    font-size: 120%;
+    margin: 0 0 1em 0;
+  }
+  .answer {
+    font-weight: bold;
+    font-size: 140%;
+    text-align: center;
+  }
+  .explanation {
+    background-color:#eeeeee;
+    margin: 1em 0;
+    padding: 1em;
+  }
+  .explanation p {
+    margin: 1em;
+  }
+  .explanation .explanation__title {
+    text-align: center;
+    font-weight: bold;
+    font-size: 120%;
+    margin: 0 0 1em 0;
   }
 </style>
 
@@ -29,24 +59,28 @@
     </p>
   {:else}
     {#if showSituation}
-      <p class="question">Situation :</p>
-      <p class="question">{question.situation}</p>
+      <div class="situation">
+        <p class="situation__title">Situation</p>
+        <p>{question.situation}</p>
+      </div>
     {/if}
     {#if showAnswer}
-      <p class="question">
+      <p class="answer">
         Réponse :
         {#if question.answer === 'error'}
-          Erreur
-        {:else if question.answer === 'failure'}
-          Echec
+          <span class="error">Erreur</span>
         {:else if question.answer === 'mistake'}
-          Faute
+          <span class="mistake">Faute</span>
+        {:else if question.answer === 'failure'}
+          <span class="failure">Echec</span>
         {:else}Type de réponse inconnue{/if}
       </p>
     {/if}
     {#if showExplanation}
-      <p class="question">Explication :</p>
-      <p class="question">{question.explanation}</p>
+    <div class="explanation">
+      <p class="explanation__title">Explication</p>
+      <p>{question.explanation}</p>
+    </div>
     {/if}
   {/if}
   <span slot="loading">Chargement de la question en cours...</span>

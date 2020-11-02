@@ -7,10 +7,17 @@
   import QuestionHeader from "../question/QuestionHeader.svelte";
   import QuestionCountDown from "../question/QuestionCountDown.svelte";
   import QuestionText from "../question/QuestionText.svelte";
-  import QuestionResults from "../question/QuestionResults.svelte"
+  import QuestionResults from "../question/QuestionResults.svelte";
 
   export let userId;
 </script>
+
+<style>
+  .next {
+    padding: 2em;
+    text-align: center;
+  }
+</style>
 
 <Doc path={`games/${userId}`} let:data={game} let:ref={gameRef} log>
   <GameHeader shortId={game.shortId} createdAt={game.createdAt} />
@@ -32,32 +39,50 @@
   {:else if game.state === 'question'}
     <QuestionHeader {game} />
     <QuestionCountDown {gameRef} numberOfSeconds={30} nextState="showResults" />
-    <QuestionText {game} showSituation={true} showAnswer={false} showExplanation={false} />
+    <QuestionText
+      {game}
+      showSituation={true}
+      showAnswer={false}
+      showExplanation={false} />
     <!-- SHOW WHAT PEOPLE ANSWERED -->
   {:else if game.state === 'showResults'}
     <QuestionHeader {game} />
-    <QuestionText {game} showSituation={true} showAnswer={false} showExplanation={false} />
+    <QuestionText
+      {game}
+      showSituation={true}
+      showAnswer={false}
+      showExplanation={false} />
     <QuestionResults gameId={userId} {game} />
-    <button on:click={() => gameRef.update({ state: 'showAnswer' })}>
-      Voir la réponse!
-    </button>
+    <p class="next">
+      <button on:click={() => gameRef.update({ state: 'showAnswer' })}>
+        Voir la réponse!
+      </button>
+    </p>
     <!-- SHOW THE ACTUAL CORRECT ANSWER -->
   {:else if game.state === 'showAnswer'}
     <QuestionHeader {game} />
-    <QuestionText {game} showSituation={true} showAnswer={true} showExplanation={true} />
-    <button on:click={() => gameRef.update({ state: 'leaderboard' })}>
-      Voir le classement!
-    </button>
+    <QuestionText
+      {game}
+      showSituation={true}
+      showAnswer={true}
+      showExplanation={true} />
+    <p class="next">
+      <button on:click={() => gameRef.update({ state: 'leaderboard' })}>
+        Voir le classement!
+      </button>
+    </p>
     <!-- SHOW THE LEADERBOARD -->
   {:else if game.state === 'leaderboard'}
     <QuestionHeader {game} />
     <h4>Leaderboard : TODO</h4>
-    <button
-      on:click={() => gameRef.update({
-          state: 'preQuestion',
-          currentQuestionIndex: game.currentQuestionIndex + 1,
-        })}>
-      Prochaine question!
-    </button>
+    <p class="next">
+      <button
+        on:click={() => gameRef.update({
+            state: 'preQuestion',
+            currentQuestionIndex: game.currentQuestionIndex + 1,
+          })}>
+        Prochaine question!
+      </button>
+    </p>
   {/if}
 </Doc>

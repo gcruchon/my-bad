@@ -4,11 +4,20 @@
 </script>
 
 <style>
-    p.started {
+    h2 {
+      text-align: center;
+    }
+    p {
+        margin-top: 0.5em;
         font-size: 80%;
         color: #999999;
+        text-align: center;
+    }
+    span {
+      background-color: #dddddd;
+      padding: 0.2em;
     }
 </style>
 
-<h2>ID du jeu : {shortId}</h2>
-<p class="started">Jeu commencé le <em>{new Date(createdAt).toLocaleString()}</em></p>
+<h2>ID du jeu : <span>{shortId}</span></h2>
+<p class="started">Jeu commencé le {new Date(createdAt).toLocaleString()}</p>

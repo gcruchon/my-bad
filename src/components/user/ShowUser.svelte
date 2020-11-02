@@ -1,9 +1,25 @@
 <script>
-  export let user
-  export let auth
+  export let user;
+  export let auth;
 </script>
 
-Salut 😀! Utilisateur
-<em>{user.uid}</em>
+<style>
+  hr {
+    height: 1px;
+    border: none;
+    background: rgb(195, 195, 195);
+  }
+  p {
+    text-align: center;
+    margin: 1.5em 0;
+  }
+</style>
 
-<button on:click={() => auth.signOut()}>Se déconnecter</button>
+<hr />
+
+<p>
+  Salut, utilisateur <em>{user.uid}</em> !
+  <button on:click={() => auth.signOut()}>Me déconnecter</button>
+</p>
+
+<hr />
