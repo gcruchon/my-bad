@@ -1,6 +1,6 @@
 <script>
   export let game;
-  $: question = game.questions[game.currentQuestionIndex];
+  $: questionId = game.questions[game.currentQuestionIndex];
 </script>
 
-<h4>Question: {question}</h4>
+<h4>Question: {questionId}</h4>

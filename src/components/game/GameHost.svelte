@@ -6,6 +6,8 @@
   import GamePlayerList from "./GamePlayerList.svelte";
   import QuestionHeader from "../question/QuestionHeader.svelte";
   import QuestionCountDown from "../question/QuestionCountDown.svelte";
+  import QuestionText from "../question/QuestionText.svelte";
+  import QuestionResults from "../question/QuestionResults.svelte"
 
   export let userId;
 </script>
@@ -30,25 +32,26 @@
   {:else if game.state === 'question'}
     <QuestionHeader {game} />
     <QuestionCountDown {gameRef} numberOfSeconds={30} nextState="showResults" />
-    <p>Texte de la question</p>
+    <QuestionText {game} showSituation={true} showAnswer={false} showExplanation={false} />
     <!-- SHOW WHAT PEOPLE ANSWERED -->
   {:else if game.state === 'showResults'}
-    <h3>showResults</h3>
     <QuestionHeader {game} />
+    <QuestionText {game} showSituation={true} showAnswer={false} showExplanation={false} />
+    <QuestionResults gameId={userId} {game} />
     <button on:click={() => gameRef.update({ state: 'showAnswer' })}>
       Voir la réponse!
     </button>
     <!-- SHOW THE ACTUAL CORRECT ANSWER -->
   {:else if game.state === 'showAnswer'}
-    <h3>answer</h3>
     <QuestionHeader {game} />
+    <QuestionText {game} showSituation={true} showAnswer={true} showExplanation={true} />
     <button on:click={() => gameRef.update({ state: 'leaderboard' })}>
       Voir le classement!
     </button>
     <!-- SHOW THE LEADERBOARD -->
   {:else if game.state === 'leaderboard'}
-    <h3>Classement</h3>
     <QuestionHeader {game} />
+    <h4>Leaderboard : TODO</h4>
     <button
       on:click={() => gameRef.update({
           state: 'preQuestion',

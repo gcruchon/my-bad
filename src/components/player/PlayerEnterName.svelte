@@ -27,7 +27,7 @@
     </p>
   {:else if players.length > 1}
     <p>
-      Nous avons trouvé plusieurs utilisateurs nvous correspondant, c'est
+      Nous avons trouvé plusieurs joueurs nvous correspondant, c'est
       embarrassant...
     </p>
   {:else}
