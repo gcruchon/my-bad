@@ -4,6 +4,8 @@
   import GameHeader from "./GameHeader.svelte";
   import GameStart from "./GameStart.svelte";
   import GamePlayerList from "./GamePlayerList.svelte";
+  import GameLeaderboard from "./GameLeaderboard.svelte";
+  import GameFinish from "./GameFinish.svelte";
   import QuestionHeader from "../question/QuestionHeader.svelte";
   import QuestionCountDown from "../question/QuestionCountDown.svelte";
   import QuestionText from "../question/QuestionText.svelte";
@@ -11,13 +13,6 @@
 
   export let userId;
 </script>
-
-<style>
-  .next {
-    padding: 2em;
-    text-align: center;
-  }
-</style>
 
 <Doc path={`games/${userId}`} let:data={game} let:ref={gameRef} log>
   <GameHeader shortId={game.shortId} createdAt={game.createdAt} />
@@ -74,15 +69,9 @@
     <!-- SHOW THE LEADERBOARD -->
   {:else if game.state === 'leaderboard'}
     <QuestionHeader {game} />
-    <h4>Leaderboard : TODO</h4>
-    <p class="next">
-      <button
-        on:click={() => gameRef.update({
-            state: 'preQuestion',
-            currentQuestionIndex: game.currentQuestionIndex + 1,
-          })}>
-        Prochaine question!
-      </button>
-    </p>
+    <GameLeaderboard {game} {gameRef} />
+    <!-- FINISHED -->
+  {:else if game.state === 'finished'}
+    <GameFinish />
   {/if}
 </Doc>

@@ -5,6 +5,7 @@
   import PlayerEnterName from "./PlayerEnterName.svelte";
   import PlayerEnterChoice from "./PlayerEnterChoice.svelte";
   import GameHeader from "../game/GameHeader.svelte";
+  import GameFinish from "../game/GameFinish.svelte";
   import QuestionHeader from "../question/QuestionHeader.svelte";
   import { gameShortId } from "../../stores";
 
@@ -43,6 +44,9 @@
       {:else if game.state === 'question' || game.state === 'showResults' || game.state === 'showAnswer' || game.state === 'leaderboard'}
         <QuestionHeader {game} />
         <PlayerEnterChoice {userId} {game} />
+        <!-- FINISHED -->
+      {:else if game.state === 'finished'}
+        <GameFinish />
       {:else}
         <QuestionHeader {game} />
         <p>Statut non géré</p>
