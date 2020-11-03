@@ -4,6 +4,13 @@
   export let game;
 
   const questionId = game.questions[game.currentQuestionIndex];
+
+  const saveAnswer = (answersRef, questionId, value) =>
+    answersRef.add({
+      questionId: questionId,
+      value: value,
+      createdAt: Date.now(),
+    });
 </script>
 
 <style>
@@ -38,29 +45,17 @@
           <p>Pour vous, c'est :</p>
           <p>
             <button
-              on:click={() => answersRef.add({
-                  questionId: questionId,
-                  value: 'error',
-                  createdAt: Date.now(),
-                })}>
+              on:click={() => saveAnswer(answersRef, questionId, 'error')}>
               une
               <span class="error">erreur</span>
             </button>
             <button
-              on:click={() => answersRef.add({
-                  questionId: questionId,
-                  value: 'mistake',
-                  createdAt: Date.now(),
-                })}>
+              on:click={() => saveAnswer(answersRef, questionId, 'mistake')}>
               une
               <span class="mistake">faute</span>
             </button>
             <button
-              on:click={() => answersRef.add({
-                  questionId: questionId,
-                  value: 'failure',
-                  createdAt: Date.now(),
-                })}>
+              on:click={() => saveAnswer(answersRef, questionId, 'failure')}>
               un
               <span class="failure">échec</span>
             </button>
