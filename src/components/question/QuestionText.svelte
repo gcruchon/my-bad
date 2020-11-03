@@ -1,11 +1,18 @@
 <script>
   import { Collection } from "sveltefire";
+  import marked from "marked";
+  import DOMPurify from 'dompurify';
 
   export let game;
   export let showSituation = true;
   export let showAnswer = false;
   export let showExplanation = false;
+
   const questionId = game.questions[game.currentQuestionIndex];
+
+  const mdToHtml = text => {
+    return DOMPurify.sanitize(marked(text.replace(/\\n/gi, "\n")));
+  }
 </script>
 
 <style>
@@ -61,7 +68,7 @@
     {#if showSituation}
       <div class="situation">
         <p class="situation__title">Situation</p>
-        <p>{question.situation}</p>
+        <p>{@html mdToHtml(question.situation)}</p>
       </div>
     {/if}
     {#if showAnswer}
@@ -79,7 +86,7 @@
     {#if showExplanation}
     <div class="explanation">
       <p class="explanation__title">Explication</p>
-      <p>{question.explanation}</p>
+      <p>{@html mdToHtml(question.explanation)}</p>
     </div>
     {/if}
   {/if}
