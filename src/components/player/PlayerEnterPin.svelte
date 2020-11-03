@@ -1,6 +1,6 @@
 <script>
   import { gameShortId } from "../../stores";
-  $: localGameShortId = $gameShortId;
+  $: localGameShortId = '';
   let updateGameShortId = () => {
     $gameShortId = localGameShortId;
   };

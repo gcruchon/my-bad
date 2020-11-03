@@ -3,7 +3,7 @@
   export let userId;
   export let gameId;
 
-  $: playerName = "";
+  $: playerName = '';
 </script>
 
 <Collection
