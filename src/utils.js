@@ -1,4 +1,4 @@
-const NUMBER_OF_AVAILABLE_QUESTIONS = 3;
+const NUMBER_OF_AVAILABLE_QUESTIONS = 6;
 
 export const asyncForEach = async (enumObject, callback) => {
   const promises = [];

@@ -4,7 +4,7 @@
 
   export let gameRef;
 
-  const nanoid = customAlphabet("1234567890ABCDEFGHJKLMNPQRSTUVWYZ", 8);
+  const nanoid = customAlphabet("123456789ABCDEFGHJKLMNPQRSTUVWYZ", 8);
 </script>
 
 <button
@@ -12,7 +12,7 @@ on:click={() => gameRef.set({
     shortId: nanoid(),
     state: 'waitingForPlayers',
     currentQuestionIndex: 0,
-    questions: getRandomQuestions(3),
+    questions: getRandomQuestions(6),
     createdAt: Date.now(),
   })}>
 Initier un tour!
