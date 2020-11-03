@@ -3,7 +3,7 @@
 src/config/firebaseConfig.js
 
 # Generated files
-public/
+public/build/
 
 ### Node ###
 # Logs
@@ -16,3 +16,6 @@ lerna-debug.log*
 
 # Dependency directories
 node_modules/
+
+# Firebase
+.firebase
