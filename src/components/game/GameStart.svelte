@@ -12,7 +12,7 @@ on:click={() => gameRef.set({
     shortId: nanoid(),
     state: 'waitingForPlayers',
     currentQuestionIndex: 0,
-    questions: getRandomQuestions(6),
+    questions: getRandomQuestions(20),
     createdAt: Date.now(),
   })}>
 Initier un tour!
