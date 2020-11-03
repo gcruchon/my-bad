@@ -1,5 +1,6 @@
 <script>
   import { customAlphabet } from "nanoid/non-secure";
+  import { getRandomQuestions } from "../../utils"
 
   export let gameRef;
 
@@ -11,7 +12,7 @@ on:click={() => gameRef.set({
     shortId: nanoid(),
     state: 'waitingForPlayers',
     currentQuestionIndex: 0,
-    questions: [1, 2, 3],
+    questions: getRandomQuestions(3),
     createdAt: Date.now(),
   })}>
 Initier un tour!
