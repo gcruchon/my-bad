@@ -1,6 +1,5 @@
 <script>
   export let game;
-  $: questionId = game.questions[game.currentQuestionIndex];
 </script>
 
 <style>
@@ -10,4 +9,4 @@
   }
 </style>
 
-<h4>Question n°{questionId}</h4>
+<h4>Question n°{game.currentQuestionIndex + 1}</h4>
