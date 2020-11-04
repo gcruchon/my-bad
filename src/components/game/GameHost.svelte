@@ -14,6 +14,12 @@
   export let userId;
 </script>
 
+<style>
+  .next {
+    text-align: center;
+  }
+</style>
+
 <Doc path={`games/${userId}`} let:data={game} let:ref={gameRef} log>
   <GameHeader shortId={game.shortId} createdAt={game.createdAt} />
 
