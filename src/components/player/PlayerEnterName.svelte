@@ -6,6 +6,12 @@
   $: playerName = '';
 </script>
 
+<style>
+  p {
+    text-align: center;
+  }
+</style>
+
 <Collection
   path={`games/${gameId}/players`}
   query={(ref) => ref.where('userId', '==', userId)}
@@ -27,7 +33,7 @@
     </p>
   {:else if players.length > 1}
     <p>
-      Nous avons trouvé plusieurs joueurs nvous correspondant, c'est
+      Nous avons trouvé plusieurs joueurs vous correspondant, c'est
       embarrassant...
     </p>
   {:else}

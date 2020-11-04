@@ -39,6 +39,7 @@
     "rollup-plugin-terser": "^7.0.2",
     "sirv-cli": "^0.4.4",
     "svelte": "^3.29.4",
+    "svelte-routing": "^1.4.2",
     "sveltefire": "^0.1.1"
   }
 }

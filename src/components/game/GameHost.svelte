@@ -4,7 +4,7 @@
   import GameHeader from "./GameHeader.svelte";
   import GameStart from "./GameStart.svelte";
   import GamePlayerList from "./GamePlayerList.svelte";
-  import GameLeaderboard from "./GameLeaderboard.svelte";
+  import GameButtons from "./GameButtons.svelte";
   import GameFinish from "./GameFinish.svelte";
   import QuestionHeader from "../question/QuestionHeader.svelte";
   import QuestionCountDown from "../question/QuestionCountDown.svelte";
@@ -61,15 +61,7 @@
       showSituation={true}
       showAnswer={true}
       showExplanation={true} />
-    <p class="next">
-      <button on:click={() => gameRef.update({ state: 'leaderboard' })}>
-        Voir le classement!
-      </button>
-    </p>
-    <!-- SHOW THE LEADERBOARD -->
-  {:else if game.state === 'leaderboard'}
-    <QuestionHeader {game} />
-    <GameLeaderboard {game} {gameRef} />
+    <GameButtons {game} {gameRef} />
     <!-- FINISHED -->
   {:else if game.state === 'finished'}
     <GameFinish />

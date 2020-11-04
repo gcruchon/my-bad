@@ -1,4 +1,5 @@
 <script>
+  import { Router, Route, navigate } from "svelte-routing";
   import { FirebaseApp, User } from "sveltefire";
   import firebase from "firebase/app";
   import "firebase/firestore";
@@ -12,6 +13,9 @@
   import SignIn from "./components/user/SignIn.svelte";
   import GameHost from "./components/game/GameHost.svelte";
   import PlayerHome from "./components/player/PlayerHome.svelte";
+  import PlayerEnterPin from "./components/player/PlayerEnterPin.svelte";
+
+  export let url = "";
 
   firebase.initializeApp(firebaseConfig);
 
@@ -47,17 +51,16 @@
     }
   }
 
-
   :global(.error) {
-    color:purple;
+    color: purple;
     font-weight: bold;
   }
   :global(.mistake) {
-    color:orangered;
+    color: orangered;
     font-weight: bold;
   }
   :global(.failure) {
-    color:olive;
+    color: olive;
     font-weight: bold;
   }
 </style>
@@ -66,41 +69,40 @@
   {#if !firebaseConfig.projectId}
     <strong>Please check your config...</strong>
   {/if}
+  <Router {url}>
+    <FirebaseApp {firebase}>
+      <h1>My bad! 😅</h1>
 
-  <FirebaseApp {firebase}>
-    <h1>My bad! 😅</h1>
+      <User let:user let:auth>
+        <ShowUser {user} {auth} />
 
-    <User let:user let:auth>
-      <ShowUser {user} {auth} />
+        <div slot="signed-out">
+          <SignIn {auth} />
+        </div>
 
-      <div slot="signed-out">
-        <SignIn {auth} />
-      </div>
-
-      {#if userType === 'host'}
-        <GameHost userId={user.uid} />
-      {:else if userType === 'player'}
-        <PlayerHome userId={user.uid} />
-      {:else}
-        <h2>Que souhaitez-vous faire ?</h2>
-
-        <p>
-          <button
-            on:click={() => {
-              updateUserType('host');
-            }}>
-            Initier un nouveau jeu
-          </button>
-        </p>
-        <p>
-          <button
-            on:click={() => {
-              updateUserType('player');
-            }}>
-            Rejoindre un jeu existant
-          </button>
-        </p>
-      {/if}
-    </User>
-  </FirebaseApp>
+        <Route path="player/:gameShortId" let:params>
+          <PlayerHome userId={user.uid} gameShortId="{params.gameShortId}" />
+        </Route>
+        <Route path="player">
+          <PlayerEnterPin />
+        </Route>
+        <Route path="host">
+          <GameHost userId={user.uid} />
+        </Route>
+        <Route path="/">
+          <h2>Vous êtes...</h2>
+          <p>
+            <button on:click={() => navigate('/host')}>
+              Un animateur
+            </button>
+          </p>
+          <p>
+            <button on:click={() => navigate('/player')}>
+              Un joueur
+            </button>
+          </p>
+        </Route>
+      </User>
+    </FirebaseApp>
+  </Router>
 </main>

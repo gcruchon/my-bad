@@ -55,7 +55,7 @@
   {/if}
   <p class="start">
     <button on:click={() => gameRef.update({ state: 'preQuestion' })}>
-      Commencer à jouer!
+      Commencer la partie !
     </button>
   </p>
   <span slot="loading">Chargement des joueurs...</span>

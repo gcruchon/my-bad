@@ -13,16 +13,13 @@
   }
 </style>
 
-<h4>Leaderboard : TODO</h4>
 {#if isLastQuestion}
-<p class="next">
-  <button
-    on:click={() => gameRef.update({
-        state: 'finished',
-      })}>
-    Terminer le jeu!
-  </button>
-</p>
+  <p class="next">
+    <button
+      on:click={() => gameRef.update({ state: 'finished', finishedAt: Date.now() })}>
+      Terminer le jeu!
+    </button>
+  </p>
 {:else}
   <p class="next">
     <button
@@ -32,5 +29,12 @@
         })}>
       Prochaine question!
     </button>
+  </p>
+  <p class="next">
+    <a
+      href="#"
+      on:click={() => gameRef.update({ state: 'finished', finishedAt: Date.now() })}>
+      Terminer le jeu !
+    </a>
   </p>
 {/if}
