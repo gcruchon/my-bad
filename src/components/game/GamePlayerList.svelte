@@ -23,6 +23,7 @@
     font-size: 110%;
   }
   .player__list {
+    text-align: center;
     margin: 1em;
   }
   .start {
