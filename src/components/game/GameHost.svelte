@@ -39,7 +39,7 @@
     <!-- ASKING THE QUESTION -->
   {:else if game.state === 'question'}
     <QuestionHeader {game} />
-    <QuestionCountDown {gameRef} numberOfSeconds={30} nextState="showResults" />
+    <QuestionCountDown {gameRef} numberOfSeconds={60} nextState="showResults" />
     <QuestionText
       {game}
       showSituation={true}
