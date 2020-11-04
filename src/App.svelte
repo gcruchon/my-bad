@@ -14,15 +14,11 @@
   import GameHost from "./components/game/GameHost.svelte";
   import PlayerHome from "./components/player/PlayerHome.svelte";
   import PlayerEnterPin from "./components/player/PlayerEnterPin.svelte";
+  import Home from "./Home.svelte";
 
   export let url = "";
 
   firebase.initializeApp(firebaseConfig);
-
-  $: userType = "";
-  let updateUserType = (type) => {
-    userType = type;
-  };
 </script>
 
 <!-- Styles -->
@@ -35,14 +31,6 @@
   h1 {
     text-align: center;
     color: #ff3e00;
-  }
-
-  h2 {
-    text-align: center;
-  }
-
-  p {
-    text-align: center;
   }
 
   @media (min-width: 640px) {
@@ -90,17 +78,7 @@
           <GameHost userId={user.uid} />
         </Route>
         <Route path="/">
-          <h2>Vous êtes...</h2>
-          <p>
-            <button on:click={() => navigate('/host')}>
-              Un animateur
-            </button>
-          </p>
-          <p>
-            <button on:click={() => navigate('/player')}>
-              Un joueur
-            </button>
-          </p>
+          <Home />
         </Route>
       </User>
     </FirebaseApp>
