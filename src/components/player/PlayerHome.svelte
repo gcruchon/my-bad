@@ -49,7 +49,7 @@
     {:else if game.state === 'preQuestion'}
       <QuestionHeader {game} />
       <p>Tenez-vous prêt.e !</p>
-    {:else if game.state === 'question' || game.state === 'showResults' || game.state === 'showAnswer' || game.state === 'leaderboard'}
+    {:else if game.state === 'question' || game.state === 'showResults' || game.state === 'showAnswer' }
       <QuestionHeader {game} />
       <PlayerEnterChoice {userId} {game} />
       <!-- FINISHED -->
