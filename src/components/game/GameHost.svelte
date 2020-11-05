@@ -10,6 +10,7 @@
   import QuestionCountDown from "../question/QuestionCountDown.svelte";
   import QuestionText from "../question/QuestionText.svelte";
   import QuestionResults from "../question/QuestionResults.svelte";
+  import QuestionCountAnswers from "../question/QuestionCountAnswers.svelte";
 
   export let userId;
 </script>
@@ -40,6 +41,7 @@
   {:else if game.state === 'question'}
     <QuestionHeader {game} />
     <QuestionCountDown {gameRef} numberOfSeconds={60} nextState="showResults" />
+    <QuestionCountAnswers {game} {gameRef} />
     <QuestionText
       {game}
       showSituation={true}
