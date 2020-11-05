@@ -1,18 +1,18 @@
 <script>
   import { Doc } from "sveltefire";
+  import { navigate } from "svelte-routing";
 
   import GameHeader from "./GameHeader.svelte";
-  import GameStart from "./GameStart.svelte";
   import GamePlayerList from "./GamePlayerList.svelte";
   import GameButtons from "./GameButtons.svelte";
   import GameFinish from "./GameFinish.svelte";
   import QuestionHeader from "../question/QuestionHeader.svelte";
-  import QuestionCountDown from "../question/QuestionCountDown.svelte";
+  import HostCountDown from "../host/HostCountDown.svelte";
   import QuestionText from "../question/QuestionText.svelte";
   import QuestionResults from "../question/QuestionResults.svelte";
   import QuestionCountAnswers from "../question/QuestionCountAnswers.svelte";
 
-  export let userId;
+  export let gameId;
 </script>
 
 <style>
@@ -21,12 +21,15 @@
   }
 </style>
 
-<Doc path={`games/${userId}`} let:data={game} let:ref={gameRef} log>
+<Doc path={`games/${gameId}`} let:data={game} let:ref={gameRef} log>
   <GameHeader shortId={game.shortId} createdAt={game.createdAt} />
 
   <span slot="loading">Chargement du jeu...</span>
   <span slot="fallback">
-    <GameStart {gameRef} />
+    Aucun jeu trouvé avec cet ID ("{gameId}").
+    <button on:click={() => navigate(`/host`)}>
+      Retourner à l'accueil de l'animateur
+    </button>
   </span>
 
   <!-- WAITING FOR PLAYERS -->
@@ -36,11 +39,11 @@
     <!-- COUNTDOWN BEFORE QUESTION -->
   {:else if game.state === 'preQuestion'}
     <QuestionHeader {game} />
-    <QuestionCountDown {gameRef} numberOfSeconds={5} nextState="question" />
+    <HostCountDown {gameRef} numberOfSeconds={5} nextState="question" />
     <!-- ASKING THE QUESTION -->
   {:else if game.state === 'question'}
     <QuestionHeader {game} />
-    <QuestionCountDown {gameRef} numberOfSeconds={60} nextState="showResults" />
+    <HostCountDown {gameRef} numberOfSeconds={60} nextState="showResults" />
     <QuestionCountAnswers {game} {gameRef} />
     <QuestionText
       {game}
@@ -55,7 +58,7 @@
       showSituation={true}
       showAnswer={false}
       showExplanation={false} />
-    <QuestionResults gameId={userId} {game} />
+    <QuestionResults {gameId} {game} />
     <p class="next">
       <button on:click={() => gameRef.update({ state: 'showAnswer' })}>
         Voir la réponse!

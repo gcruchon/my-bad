@@ -14,6 +14,7 @@
   import GameHost from "./components/game/GameHost.svelte";
   import PlayerHome from "./components/player/PlayerHome.svelte";
   import PlayerEnterPin from "./components/player/PlayerEnterPin.svelte";
+  import HostHome from "./components/host/HostHome.svelte";
   import Home from "./Home.svelte";
 
   export let url = "";
@@ -74,8 +75,11 @@
         <Route path="player">
           <PlayerEnterPin />
         </Route>
+        <Route path="host/:gameId" let:params>
+          <GameHost gameId={params.gameId} />
+        </Route>
         <Route path="host">
-          <GameHost userId={user.uid} />
+          <HostHome userId={user.uid} />
         </Route>
         <Route path="/">
           <Home />

@@ -1,6 +1,6 @@
 <script>
   import { onDestroy } from "svelte";
-  import GameEndStep from "../game/GameEndStep.svelte";
+  import HostEndStep from "../host/HostEndStep.svelte";
 
   export let gameRef;
   export let numberOfSeconds = 5;
@@ -35,6 +35,8 @@
 </style>
 
 <p>
-  Timer : {remaining} sec.
-  <GameEndStep gameRef={gameRef} nextState={nextState} label={endStepLabel} />
+  Timer :
+  {remaining}
+  sec.
+  <HostEndStep {gameRef} {nextState} label={endStepLabel} />
 </p>

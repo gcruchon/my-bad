@@ -38,7 +38,6 @@
   path={gameRef.collection('players')}
   query={(ref) => ref.orderBy('createdAt')}
   let:data={players}
-  let:ref={playersRef}
   log>
   {#if !players.length}
   <p class="player__empty">
