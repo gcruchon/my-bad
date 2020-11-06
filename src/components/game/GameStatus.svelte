@@ -1,6 +1,5 @@
 <script>
   export let game;
-  console.log('game', game);
 </script>
 
 {#if game.state == 'waitingForPlayers'}

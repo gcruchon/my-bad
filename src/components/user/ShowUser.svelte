@@ -1,5 +1,6 @@
 <script>
   import { getContext } from "svelte";
+  import { navigate } from "svelte-routing";
   import { hasGamesInProgress, cleanUpUser } from "./user";
 
   export let user;
@@ -22,7 +23,8 @@
     }
     if (shouldPerformSignOut) {
       await cleanUpUser(db, userId);
-      auth.signOut();
+      await auth.signOut();
+      navigate("/");
     }
   };
 </script>
@@ -34,18 +36,22 @@
     background: rgb(195, 195, 195);
   }
   p {
-    text-align: center;
-    margin: 1.5em 0;
+    text-align: right;
+    margin: 0;
+    background-color: #dddddd;
+    padding: 0.8em 0.5em 0.5em 0.5em;
+  }
+  em {
+    font-size: 60%;
+    color: #555;
   }
 </style>
 
-<hr />
-
 <p>
-  Salut, utilisateur
-  <em>{user.uid}</em>
-  !
+  Salut,
+  {#if user.isAnonymous}
+    cher.e Anonyme !
+    <em>({user.uid})</em>
+  {:else}{user.displayName} !{/if}
   <button on:click={() => signOut(db, user.uid, auth)}>Me déconnecter</button>
 </p>
-
-<hr />

@@ -16,6 +16,7 @@
   import PlayerEnterPin from "./components/player/PlayerEnterPin.svelte";
   import HostHome from "./components/host/HostHome.svelte";
   import Home from "./Home.svelte";
+  import Title from "./Title.svelte";
 
   export let url = "";
 
@@ -25,21 +26,8 @@
 <!-- Styles -->
 <style>
   main {
-    padding: 1em;
-    max-width: 240px;
+    padding: 0 1.5em;
   }
-
-  h1 {
-    text-align: center;
-    color: #ff3e00;
-  }
-
-  @media (min-width: 640px) {
-    main {
-      max-width: none;
-    }
-  }
-
   :global(.error) {
     color: purple;
     font-weight: bold;
@@ -54,23 +42,17 @@
   }
 </style>
 
-<main>
-  {#if !firebaseConfig.projectId}
-    <strong>Please check your config...</strong>
-  {/if}
-  <Router {url}>
-    <FirebaseApp {firebase}>
-      <h1>My bad! 😅</h1>
+{#if !firebaseConfig.projectId}<strong>Please check your config...</strong>{/if}
+<Router {url}>
+  <FirebaseApp {firebase}>
+    <User persist={sessionStorage} let:user let:auth>
+      <ShowUser {user} {auth} />
 
-      <User let:user let:auth>
-        <ShowUser {user} {auth} />
-
-        <div slot="signed-out">
-          <SignIn {auth} />
-        </div>
+      <main>
+        <Title />
 
         <Route path="player/:gameShortId" let:params>
-          <PlayerHome userId={user.uid} gameShortId="{params.gameShortId}" />
+          <PlayerHome userId={user.uid} gameShortId={params.gameShortId} />
         </Route>
         <Route path="player">
           <PlayerEnterPin />
@@ -84,7 +66,14 @@
         <Route path="/">
           <Home />
         </Route>
-      </User>
-    </FirebaseApp>
-  </Router>
-</main>
+      </main>
+
+      <div slot="signed-out">
+        <main>
+          <Title />
+          <SignIn {auth} {firebase} />
+        </main>
+      </div>
+    </User>
+  </FirebaseApp>
+</Router>
