@@ -32,7 +32,7 @@
   </p>
   <p class="next">
     <a
-      href="#"
+      href={'#'}
       on:click={() => gameRef.update({ state: 'finished', finishedAt: Date.now() })}>
       Terminer le jeu !
     </a>
