@@ -30,11 +30,6 @@
 </script>
 
 <style>
-  hr {
-    height: 1px;
-    border: none;
-    background: rgb(195, 195, 195);
-  }
   p {
     text-align: right;
     margin: 0;
