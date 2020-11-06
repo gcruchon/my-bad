@@ -17,6 +17,7 @@
   import HostHome from "./components/host/HostHome.svelte";
   import Home from "./Home.svelte";
   import Title from "./Title.svelte";
+  import Footer from "./Footer.svelte";
 
   export let url = "";
 
@@ -77,3 +78,4 @@
     </User>
   </FirebaseApp>
 </Router>
+<Footer />

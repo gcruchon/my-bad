@@ -4,6 +4,7 @@ import commonjs from '@rollup/plugin-commonjs';
 import livereload from 'rollup-plugin-livereload';
 import replace from '@rollup/plugin-replace';
 import { terser } from 'rollup-plugin-terser';
+import json from '@rollup/plugin-json';
 
 const production = !process.env.ROLLUP_WATCH;
 
@@ -41,6 +42,9 @@ export default {
 			mainFields: ['main', 'module']
 		}),
 		commonjs(),
+
+		// importing JSON
+		json(),
 
 		// In dev mode, call `npm run start` once
 		// the bundle has been generated
