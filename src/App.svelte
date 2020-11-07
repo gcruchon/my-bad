@@ -1,5 +1,5 @@
 <script>
-  import { Router, Route, navigate } from "svelte-routing";
+  import { Router, Route } from "svelte-routing";
   import { FirebaseApp, User } from "sveltefire";
   import firebase from "firebase/app";
   import "firebase/firestore";
