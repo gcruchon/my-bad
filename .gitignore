@@ -5,6 +5,7 @@ src/config/firebaseConfig.js
 # Generated files
 dist/
 public/build/
+coverage/
 
 ### Node ###
 # Logs
