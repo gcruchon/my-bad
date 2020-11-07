@@ -1,0 +1,122 @@
+[
+  {
+    "questionId": 1,
+    "situation": "Vous venez d’envoyer un mail - avec des données confidentielles – malheureusement, vous vous êtes trompé de destinataire !\\n\\nC’est la première fois que cela vous arrive, vous avez fait confiance au correcteur et ce n’était pas Emilie Dupont mais Emilie Duvide.\\n\\nCette personne n’aurait jamais dû avoir accès à ces données... oups !",
+    "answer": "error",
+    "explanation": "Dans ce cas-là, c’est la première fois que vous vous trompez, il s’agit donc d’**une erreur**.\\n\\nUne erreur est un acte unitaire regrettable qui consiste à se tromper, à dévier de la norme ou de la « bonne » façon de faire (couper le mauvais serveur en production, se tromper dans un calcul, envoyer un email au mauvais destinataire, etc.). ​"
+  },
+  {
+    "questionId": 2,
+    "situation": "Vous vous êtes lancé le défi de finir un marathon, soit 42,195 kilomètres. Vous vous lancez à toute allure dès les premiers kilomètres.\\n\\nÉpuisé, vous abandonnez au 33ème kilomètre.",
+    "answer": "failure",
+    "explanation": "Votre objectif était de terminer ce marathon, vous n’avez donc pas atteint l’objectif que vous vous étiez fixé, **c’est un échec**.\\n\\nUn échec consiste à ne pas arriver au résultat attendu. Il est possible d’échouer après avoir commis une ou plusieurs erreurs. Il existe aussi des formes d’échec qui ne sont pas liées, en tant que tel, à l’acte de la personne qui échoue (dépasser le nombre d’incidents majeurs fixé par la DSI, augmenter le taux de détraction d’un produit, ne pas faire passer les bons messages à son équipe...).\\n\\nCet échec peut s’expliquer par plusieurs “erreurs”, par exemple : pas d’entraînements adaptés à l’objectif fixé, pas le bon matériel utilisé, pas l’état d’esprit en phase avec cet objectif."
+  },
+  {
+    "questionId": 3,
+    "situation": "Votre ami vous prête sa voiture pour les vacances.​\\n\\nVous faites un plein de « Sans Plomb », malheureusement c’était une voiture diesel !",
+    "answer": "mistake",
+    "explanation": "Se tromper de carburant peut être fatal pour le moteur de la voiture ! Vous auriez dû prendre plus de précaution, vous renseigner auprès de votre ami avant de faire le plein. Il s’agit donc d’**une faute**."
+  },
+  {
+    "questionId": 4,
+    "situation": "Vous réservez vos billets de train pour partir en vacances mais vous vous trompez de semaine. Les billets sont modifiables jusqu’à une semaine avant le départ.",
+    "answer": "error",
+    "explanation": "**Erreur** de parcours... Ouf, il est encore temps de changer les billets !\\n\\nEn revanche, si vous vous en rendez compte la veille, quel **échec**, les vacances tombent à l’eau !"
+  },
+  {
+    "questionId": 5,
+    "situation": "Vous ne vous sentez pas bien, vous prenez rendez-vous chez votre médecin traitant qui vous suit depuis des années.\\n\\nIl vous diagnostique une angine.\\n\\nIl vous prescrit tout un tas de médicaments. Vous lui rappelez votre allergie à la pénicilline. Vous les achetez à la pharmacie et suite à la première prise de médicaments, vous déclenchez une allergie.\\n\\nVotre médecin était pourtant au courant de votre allergie à la pénicilline... et dans ces médicaments, il y a un dérivé de la pénicilline !",
+    "answer": "mistake",
+    "explanation": "Votre médecin étant informé de cette allergie, il vient de commettre **une faute**. Heureusement pour vous, vous ne vous en sortez pas trop mal."
+  },
+  {
+    "questionId": 6,
+    "situation": "Votre entreprise de démolition est mandatée sur un chantier pour démolir une vieille maison.\\n\\nUne fois dans le lotissement, vous repérez la maison et commencez les travaux sans vérification particulière, vous êtes certain que c’est celle-ci !\\n\\nPourtant, il est bien spécifié sur le protocole qu’une vérification préalable est obligatoire.",
+    "answer": "mistake",
+    "explanation": "Vous n’avez pas respecté le protocole, spécialement mis en place pour éviter ce genre d’erreur. Une famille se retrouve avec une maison complètement détruite. Il s’agit évidemment d’**une faute**."
+  },
+  {
+    "questionId": 7,
+    "situation": "Vous êtes le témoin du mariage de votre frère.\\n\\nIl vous confie la bague de la mariée, vous la rangez aussitôt dans votre veste de costume. A la dernière minute vous vous tachez et changez de veste !\\n\\nAu moment crucial de la cérémonie, votre frère vous regarde d’un air complice. Il est temps pour vous de lui remettre la bague. Vous cherchez dans votre veston. Vos doigts ne palpent malheureusement que le vide. Votre respiration s’accélère…",
+    "answer": "error",
+    "explanation": "C’est **une erreur**, dans la précipitation, la bague est restée dans votre ancienne veste."
+  },
+  {
+    "questionId": 8,
+    "situation": "Au VIIe siècle des alchimistes chinois tentant de mettre au point un élixir de jouvence ont mélangé des substances aux propriétés prometteuses telles que le salpêtre (utilisé pour la conservation des aliments à l’époque), le miel (réputé comme favorisant la cicatrisation) et le souffre (qui, en brûlant, produit un gaz purificateur).\\n\\nCe mélange n’a pas conduit à la création de l’elixir attendu mais de la poudre noire, élément indispensable au fonctionnement de tous les dispositifs pyrotechniques !",
+    "answer": "failure",
+    "explanation": "Et oui, la cible au départ était la création d’un élixir de vie. Ces alchimistes n’ont pas atteint leur objectif initial. Une bonne illustration qu’**un échec** peut conduire à de l'innovation."
+  },
+  {
+    "questionId": 9,
+    "situation": "Votre réservez un billet de train en ligne avec une carte de réduction. Une fois dans le train, vous êtes contrôlé.\\n\\nVotre carte est expirée, vous recevez une amende.",
+    "answer": "error",
+    "explanation": "Vous n’aviez pas l’intention de frauder, vous n’avez simplement pas vérifié la date de validité de votre carte, il s’agit d’**une erreur**."
+  },
+  {
+    "questionId": 10,
+    "situation": "Vous allez chez le boucher acheter de la viande hachée.\\n\\nCelui-ci vous donne un steak haché déjà préparé, vous ne savez pas depuis combien de temps. Il vous semble qu’habituellement la viande est hachée devant vous, justement pour éviter les problèmes de bactéries.\\n\\nVous acceptez tout de même de l’acheter en gardant vos remarques pour vous. Le lendemain vous êtes pris de maux de ventre.",
+    "answer": "mistake",
+    "explanation": "Vous avez fait l’erreur de ne rien dire, mieux vaut prévenir que guérir ! Votre boucher quant à lui n’a pas suivi le protocole sanitaire, il s’agit d’**une faute**."
+  },
+  {
+    "questionId": 11,
+    "situation": "Vous louez un superbe appartement avec votre famille et votre belle-mère pour les vacances. Un orage s’approche, la chaleur se fait vraiment sentir.\\n\\nVous demandez à votre belle-mère de bien fermer la fenêtre. Elle n’a pas l’air de l’entendre de cette oreille : « il est important de faire des courants d’air pour faire sécher le linge ». Deux heures plus tard, l’appartement est inondé, le parquet est foutu !",
+    "answer": "mistake",
+    "explanation": "Vous aviez pourtant prévenu votre belle-mère, elle n’a pas suivi vos indications, il s’agit d’**une faute**."
+  },
+  {
+    "questionId": 12,
+    "situation": "Vous lavez votre linge, vous avez oublié un mouchoir en papier dans la poche de votre pantalon.\\n\\nPatatra, le mouchoir se désintègre lors du lavage.\\n\\nC’est la quinzième fois ce mois-ci, la résistance de votre machine est couverte de particules et fait disjoncter votre compteur électrique.\\n\\nBilan des courses, résistance à changer, linge foutu et machine à nettoyer !",
+    "answer": "mistake",
+    "explanation": "Vous venez de commettre pour la quinzième fois la même erreur, c’est **une faute** !"
+  },
+  {
+    "questionId": 13,
+    "situation": "Nouvel embauché, vous arrivez en retard, le process RH nécessite que vous vous justifiiez.\\n\\nPour ne pas vous tromper, vous reprenez un mail récent de la RH pour ne pas oublier de destinataire. Malheureusement vous faites un « répondre à tous » et tous les collaborateurs reçoivent votre mail.",
+    "answer": "error",
+    "explanation": "C’est **une erreur** d’inattention. Vous n’avez enfreint aucune règle."
+  },
+  {
+    "questionId": 14,
+    "situation": "Vous faites partie des équipes de maintenance dans une usine. Une machine est en panne. Un plan d’action est mis en place.\\n\\nVous intervenez sur plusieurs étapes, mettez à jour le plan d’action. À l’étape 17, vous indiquez « Réalisé l’étalonnage ».\\n\\nVotre journée est terminée vous partez. L’équipe de jour prend la suite et tente de faire l’étape 18 mais les résultats sont instables.\\n\\nElle vous téléphone et vous répondez « Avez-vous bien fait l’étalonnage ? ».\\n\\nInterloqué, après un long silence embarrassant, votre interlocuteur répond que non, puisque vous avez écrit « Réalis*é* » et non « Réalis*er* ».",
+    "answer": "mistake",
+    "explanation": "Ce genre de faute d’accord (« Réaliser » vs. « Réalisé ») dans un rapport d’intervention est dommageable. Quand on a un doute sur les règles de grammaire, mieux vaut faire des phrases explicites et surtout ne pas se fier à son correcteur automatique. C'est donc **une faute**."
+  },
+  {
+    "questionId": 15,
+    "situation": "Il est lundi 8h, vous vous rendez à votre cours de mathématiques. Vous assistez au cours.\\n\\nAu bout d’un moment, vous vous rendez compte que l’on vous parle d’univers. Bon OK il existe bien des univers en math mais quand le prof parle des anneaux de Saturne là, vous avez comme un doute !\\n\\nEt oui, vous êtes trompé de bâtiment. Vous êtes bien en salle 301 mais du bâtiment C !",
+    "answer": "error",
+    "explanation": "Lundi matin 8h après un week end au vert, vous aviez la tête ailleurs, **une erreur** est si vite arrivée dans ce dédale de bâtiments !"
+  },
+  {
+    "questionId": 16,
+    "situation": "Cela fait des semaines que vous occupez vos longues soirées à faire ce puzzle de la tour Eiffel en 10 000 pièces.\\n\\nLe dernier jour arrive enfin et là, malédiction, après avoir posé la dernière pièce en votre possession vous vous rendez compte qu’il en manque une pour finir et la belle photo attendue se trouve entachée d’un gros blanc en plein milieu !",
+    "answer": "failure",
+    "explanation": "Oui, vous êtes frustré de *cet échec* et avez l’impression que tous vos efforts ne sont clairement pas récompensés, et pourtant vous n’avez commis aucune erreur ou faute, il manquait seulement une pièce dans la boite !"
+  },
+  {
+    "questionId": 17,
+    "situation": "Votre repas vient de se finir, vous débarrassez la table et êtes confronté à un dilemme inattendu : la feuille d’aluminium qui fermait la barquette de vos sushis préférés doit-elle être déposée dans la poubelle recyclable ou dans les déchets ménagers ?\\n\\nAprès mure réflexion vous optez pour les déchets ménagers, en effet il vous semble avoir lu que la feuille d’aluminium est trop fine pour être recyclé.",
+    "answer": "error",
+    "explanation": "Et oui, il est maintenant possible de recycler les fines feuilles d’aluminium et les consignes de tri ont évolués récemment en conséquence.\\n\\nCertes vous avez fait **une erreur** mais vous vous êtes posé.e la question et avez appris en conséquence, la planète vous remercie !"
+  },
+  {
+    "questionId": 18,
+    "situation": "Enfin le jour du départ en vacances est arrivé, pour une fois vous avez décidé de ne pas prendre l’autoroute mais d’aller faire un détour par les nationales et départementales.\\n\\nMais là, désolation : les limitations de vitesse changent sans cesse passant de 30, 50, 80 à 90 km/h et vous devez moduler votre allure en fonction des tronçons.\\n\\nAu bout de quelques km vous décidez de vous caler sur une vitesse moyenne de 75 km/h partout comme ça tout le monde est content et vous ne passez plus votre temps à regarder les panneaux ou votre GPS !",
+    "answer": "mistake",
+    "explanation": "Et oui, vous avez fait délibérément le choix de transgresser la règle, c'est **une faute** ! Les limitations de vitesse sont là pour adapter la vitesse à la situation et au danger. Bon retour... par l’autoroute ! 😊"
+  },
+  {
+    "questionId": 19,
+    "situation": "Nous sommes fin mars, un dimanche. Vous êtes attendus pour déjeuner chez des amis à 12h30. Il vous faut 45 minutes pour vous rendre sur place. Au moment de partir, coup de fil de votre ami « Bah t’es encore chez toi ? Qu'est-ce que tu fais, on t’attend ! ».\\n\\n Interloqué vous ne comprenez pas. Il est 11h45, vous n’êtes pas en retard et partagez cela avec votre ami.\\n\\n « Et dis donc, n’aurais-tu pas oublié de changer l’heure de tes montres ? Je te rappelle que cette nuit on est passé à l’heure d’été ! »",
+    "answer": "error",
+    "explanation": "Eh oui, vous n’avez pas regardé, mais nous sommes bien le dernier dimanche de mars, date à laquelle on change d’heure ! A 2h du matin, il sera 3h ! L’année prochaine, vous mettrez un rappel dans votre agenda et changerez l’heure de vos montre/IPhone le samedi pour éviter **cette erreur** !"
+  },
+  {
+    "questionId": 20,
+    "situation": "Vous devez animer ce matin une réunion particulièrement importante à 8h30 et avez réservé en conséquence une grande salle que vous ne connaissiez pas.\\n\\nVu l’heure matinale vous avez tout préparé la veille, fait sonner le réveil à l’heure qui va bien et êtes arrivé en pleine forme au bâtiment T5-2eme étage avec 10mn d’avance mais là, horreur, impossible de trouver la salle réservée sur les panneaux d’indications de l’étage, une sueur froide commence à couler sur votre front...\\n\\nPris d’un doute vous ouvrez votre PC et lancer Outlook, damned, la salle est en fait au T2-5ème étage !\\n\\nVous refermez d’un coup sec votre portable et bondissez dans l’ascenseur...",
+    "answer": "error",
+    "explanation": "Obnubilé par l’enjeu il peut nous arriver de passer à travers certains détails pourtant importants.\\n\\nVous aviez pourtant bien préparé la réunion et même prévu d’arriver en avance pour que tout se passe au mieux. C’est d’ailleurs cette marge de quelques minutes qui vous permettra d’arriver à l’heure malgré votre confusion.\\n\\nAu final vous avez fait **une erreur** mais avez été en mesure de la compenser par votre prévoyance !"
+  }
+]
