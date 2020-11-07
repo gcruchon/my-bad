@@ -1,0 +1,38 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    function userIsSignedIn() {
+      return request.auth != null;
+    }
+    match /{document=**} {
+      allow read: if userIsSignedIn();
+      allow write: if false;
+    }
+    match /games/{game} {
+      function gameData() {
+          return get(/databases/$(database)/documents/games/$(game)).data
+      }
+      function gameHasNotYetStarted() {
+        return gameData().state == 'waitingForPlayers';
+      }
+    	allow create: if userIsSignedIn();
+      allow update: if resource.data.creatorId == request.auth.uid;
+      
+      match /players/{player} {
+        function playerData() {
+            return get(/databases/$(database)/documents/games/$(game)/players/$(player)).data
+        }
+        function userIsThePlayer() {
+          return playerData().userId == request.auth.uid;
+        }
+        allow create: if gameHasNotYetStarted() && userIsSignedIn();
+        allow update: if userIsThePlayer();
+        allow delete: if userIsThePlayer() || gameData().creatorId == request.auth.uid;
+        
+        match /answers/{answer} {
+        	allow write: if userIsThePlayer();        
+        }
+      }
+    }
+  }
+}
