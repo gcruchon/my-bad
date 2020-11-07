@@ -8,7 +8,7 @@ export const asyncForEach = async (enumObject, callback) => {
   return await Promise.all(promises);
 };
 
-const shuffle = (array) => {
+export const shuffle = (array) => {
   var currentIndex = array.length, temporaryValue, randomIndex;
 
   // While there remain elements to shuffle...
@@ -32,6 +32,14 @@ export const getRandomQuestions = (numberOfQuestions) => {
     throw 'You ask too many questions!';
   }
   const orderedArray = Array.from(Array(NUMBER_OF_AVAILABLE_QUESTIONS + 1).keys()).slice(1, NUMBER_OF_AVAILABLE_QUESTIONS + 1);
-  const shuffledArray = shuffle(orderedArray);
+  const shuffledArray = utils.shuffle(orderedArray);
   return shuffledArray.slice(0, numberOfQuestions);
 }
+
+const utils = {
+  asyncForEach,
+  shuffle,
+  getRandomQuestions,
+}
+
+export default utils;

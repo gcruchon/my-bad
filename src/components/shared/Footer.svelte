@@ -1,5 +1,5 @@
 <script>
-  import pkg from "../../../package.json";
+  import { getAppVersion } from "./shared";
 </script>
 
 <!-- Styles -->
@@ -17,4 +17,4 @@
   }
 </style>
 
-<p>version {pkg.version}</p>
+<p>version {getAppVersion()}</p>
