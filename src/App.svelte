@@ -15,9 +15,9 @@
   import PlayerHome from "./components/player/PlayerHome.svelte";
   import PlayerEnterPin from "./components/player/PlayerEnterPin.svelte";
   import HostHome from "./components/host/HostHome.svelte";
-  import Home from "./Home.svelte";
-  import Title from "./Title.svelte";
-  import Footer from "./Footer.svelte";
+  import Home from "./components/shared/Home.svelte";
+  import Title from "./components/shared/Title.svelte";
+  import Footer from "./components/shared/Footer.svelte";
 
   export let url = "";
 

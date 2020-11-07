@@ -1,6 +1,5 @@
 <script>
-  import pkg from "../package.json";
-  console.log("Footer", pkg);
+  import pkg from "../../../package.json";
 </script>
 
 <!-- Styles -->
