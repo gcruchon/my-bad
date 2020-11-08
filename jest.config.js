@@ -1,13 +1,13 @@
-const esModules = ['svelte-routing'].join('|');
+const esModules = ['svelte-routing', 'sveltefire'].join('|');
 
 module.exports = {
   transform: {
     '^.+\\.js$': 'babel-jest',
     '^.+\\.svelte$': 'svelte-jester',
   },
-  testPathIgnorePatterns: ['node_modules'],
+  testPathIgnorePatterns: ['/node_modules/'],
   transformIgnorePatterns: [`/node_modules/(?!${esModules})`],
-  moduleFileExtensions: ['js', 'svelte'],
+  moduleFileExtensions: ['js', 'json', 'svelte'],
   verbose: true,
   bail: false,
   setupFilesAfterEnv: ['@testing-library/jest-dom/extend-expect'],
@@ -19,4 +19,5 @@ module.exports = {
     './src/data/',
     './src/main.js',
   ],
+  resolver: './svelte-resolver.js',
 };
