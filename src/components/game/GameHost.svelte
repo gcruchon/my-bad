@@ -1,16 +1,17 @@
 <script>
-  import { Doc } from "sveltefire";
-  import { navigate } from "svelte-routing";
+  import { Doc } from 'sveltefire';
+  import { navigate } from 'svelte-routing';
 
-  import GameHeader from "./GameHeader.svelte";
-  import GamePlayerList from "./GamePlayerList.svelte";
-  import GameButtons from "./GameButtons.svelte";
-  import GameFinish from "./GameFinish.svelte";
-  import QuestionHeader from "../question/QuestionHeader.svelte";
-  import HostCountDown from "../host/HostCountDown.svelte";
-  import QuestionText from "../question/QuestionText.svelte";
-  import QuestionResults from "../question/QuestionResults.svelte";
-  import QuestionCountAnswers from "../question/QuestionCountAnswers.svelte";
+  import GameHeader from './GameHeader.svelte';
+  import GamePlayerList from './GamePlayerList.svelte';
+  import GameButtons from './GameButtons.svelte';
+  import GameSeeAnswerButton from './GameSeeAnswerButton.svelte';
+  import GameFinish from './GameFinish.svelte';
+  import QuestionHeader from '../question/QuestionHeader.svelte';
+  import HostCountDown from '../host/HostCountDown.svelte';
+  import QuestionText from '../question/QuestionText.svelte';
+  import QuestionResults from '../question/QuestionResults.svelte';
+  import QuestionCountAnswers from '../question/QuestionCountAnswers.svelte';
 
   export let gameId;
 </script>
@@ -27,7 +28,7 @@
   <span slot="loading">Chargement du jeu...</span>
   <span slot="fallback">
     Aucun jeu trouvé avec cet ID ("{gameId}").
-    <button on:click={() => navigate(`/host`)}>
+    <button on:click={() => navigate('/host')}>
       Retourner à l'accueil de l'animateur
     </button>
   </span>
@@ -59,11 +60,7 @@
       showAnswer={false}
       showExplanation={false} />
     <QuestionResults {gameId} {game} />
-    <p class="next">
-      <button on:click={() => gameRef.update({ state: 'showAnswer' })}>
-        Voir la réponse!
-      </button>
-    </p>
+    <GameSeeAnswerButton {gameRef} />
     <!-- SHOW THE ACTUAL CORRECT ANSWER -->
   {:else if game.state === 'showAnswer'}
     <QuestionHeader {game} />
