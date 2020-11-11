@@ -5,7 +5,7 @@
   import GameHeader from './GameHeader.svelte';
   import GamePlayerList from './GamePlayerList.svelte';
   import GameButtons from './GameButtons.svelte';
-  import GameSeeAnswerButton from './GameSeeAnswerButton.svelte';
+  import GameShowAnswerButton from './GameShowAnswerButton.svelte';
   import GameFinish from './GameFinish.svelte';
   import QuestionHeader from '../question/QuestionHeader.svelte';
   import HostCountDown from '../host/HostCountDown.svelte';
@@ -60,7 +60,7 @@
       showAnswer={false}
       showExplanation={false} />
     <QuestionResults {gameId} {game} />
-    <GameSeeAnswerButton {gameRef} />
+    <GameShowAnswerButton {gameRef} />
     <!-- SHOW THE ACTUAL CORRECT ANSWER -->
   {:else if game.state === 'showAnswer'}
     <QuestionHeader {game} />

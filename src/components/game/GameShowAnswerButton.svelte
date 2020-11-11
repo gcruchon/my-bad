@@ -12,6 +12,6 @@
 
 <p class="next">
   <button on:click={() => gameRef.update({ state: 'showAnswer' })}>
-    Voir la réponse!
+    Voir la réponse !
   </button>
 </p>

@@ -2,4 +2,4 @@
   export let gameRef;
 </script>
 
-<div>GameSeeAnswerButton</div>
+<div>GameShowAnswerButton</div>

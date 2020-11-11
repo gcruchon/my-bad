@@ -13,7 +13,7 @@ jest.mock('./GameHeader.svelte');
 jest.mock('./GamePlayerList.svelte');
 jest.mock('./GameButtons.svelte');
 jest.mock('./GameFinish.svelte');
-jest.mock('./GameSeeAnswerButton.svelte');
+jest.mock('./GameShowAnswerButton.svelte');
 jest.mock('../host/HostCountDown.svelte');
 jest.mock('../question/QuestionCountAnswers.svelte');
 jest.mock('../question/QuestionHeader.svelte');
@@ -58,7 +58,7 @@ describe('GameHost', () => {
     expect(container).not.toContainHTML('<div>QuestionResults</div>');
     expect(container).not.toContainHTML('<div>GameButtons</div>');
     expect(container).not.toContainHTML('<div>GameFinish</div>');
-    expect(container).not.toContainHTML('<div>GameSeeAnswerButton</div>');
+    expect(container).not.toContainHTML('<div>GameShowAnswerButton</div>');
 
     const buttonHome = getByText(/Retourner à l'accueil de l'animateur/i);
     expect(buttonHome).toBeInTheDocument();
@@ -91,7 +91,7 @@ describe('GameHost', () => {
     expect(container).not.toContainHTML('<div>QuestionResults</div>');
     expect(container).not.toContainHTML('<div>GameButtons</div>');
     expect(container).not.toContainHTML('<div>GameFinish</div>');
-    expect(container).not.toContainHTML('<div>GameSeeAnswerButton</div>');
+    expect(container).not.toContainHTML('<div>GameShowAnswerButton</div>');
   });
   it('should render a not started game', async () => {
     setupMockModules(MockDocGameNotStarted);
@@ -117,7 +117,7 @@ describe('GameHost', () => {
     expect(container).not.toContainHTML('<div>QuestionResults</div>');
     expect(container).not.toContainHTML('<div>GameButtons</div>');
     expect(container).not.toContainHTML('<div>GameFinish</div>');
-    expect(container).not.toContainHTML('<div>GameSeeAnswerButton</div>');
+    expect(container).not.toContainHTML('<div>GameShowAnswerButton</div>');
   });
   it('should render a game in "preQuestion" state', async () => {
     setupMockModules(MockDocGamePreQuestion);
@@ -142,7 +142,7 @@ describe('GameHost', () => {
     expect(container).not.toContainHTML('<div>QuestionResults</div>');
     expect(container).not.toContainHTML('<div>GameButtons</div>');
     expect(container).not.toContainHTML('<div>GameFinish</div>');
-    expect(container).not.toContainHTML('<div>GameSeeAnswerButton</div>');
+    expect(container).not.toContainHTML('<div>GameShowAnswerButton</div>');
   });
   it('should render a game in "question" state', async () => {
     setupMockModules(MockDocGameQuestion);
@@ -167,7 +167,7 @@ describe('GameHost', () => {
     expect(container).not.toContainHTML('<div>QuestionResults</div>');
     expect(container).not.toContainHTML('<div>GameButtons</div>');
     expect(container).not.toContainHTML('<div>GameFinish</div>');
-    expect(container).not.toContainHTML('<div>GameSeeAnswerButton</div>');
+    expect(container).not.toContainHTML('<div>GameShowAnswerButton</div>');
   });
   it('should render a game in "showResults" state', async () => {
     setupMockModules(MockDocGameShowResults);
@@ -183,7 +183,7 @@ describe('GameHost', () => {
     expect(container).toContainHTML('<div>QuestionHeader</div>');
     expect(container).toContainHTML('<div>QuestionText</div>');
     expect(container).toContainHTML('<div>QuestionResults</div>');
-    expect(container).toContainHTML('<div>GameSeeAnswerButton</div>');
+    expect(container).toContainHTML('<div>GameShowAnswerButton</div>');
 
     expect(container).not.toContainHTML(
       'Aucun jeu trouvé avec cet ID ("ABCDEF").',
@@ -217,7 +217,7 @@ describe('GameHost', () => {
     expect(container).not.toContainHTML('<div>QuestionCountAnswers</div>');
     expect(container).not.toContainHTML('<div>QuestionResults</div>');
     expect(container).not.toContainHTML('<div>GameFinish</div>');
-    expect(container).not.toContainHTML('<div>GameSeeAnswerButton</div>');
+    expect(container).not.toContainHTML('<div>GameShowAnswerButton</div>');
   });
   it('should render a finished game', async () => {
     setupMockModules(MockDocGameFinished);
@@ -242,6 +242,6 @@ describe('GameHost', () => {
     expect(container).not.toContainHTML('<div>QuestionHeader</div>');
     expect(container).not.toContainHTML('<div>QuestionText</div>');
     expect(container).not.toContainHTML('<div>GameButtons</div>');
-    expect(container).not.toContainHTML('<div>GameSeeAnswerButton</div>');
+    expect(container).not.toContainHTML('<div>GameShowAnswerButton</div>');
   });
 });
