@@ -40,48 +40,41 @@ describe('App', () => {
     });
   };
 
-  it('should render component when not logged in', () => {
+  it('should render component when not logged in', async () => {
     setupMockModules(MockUserNotLoggedIn, firebaseConfigMock);
-    return import('sveltefire').then(sveltefire => {
-      return import('./config/firebaseConfig').then(config => {
-        return import('./App.svelte').then(App => {
-          const { container } = render(App);
-          expect(container).toContainHTML('My bad! 😅');
-          expect(container).toContainHTML('<div>SignIn</div>');
+    await import('sveltefire');
+    await import('./config/firebaseConfig');
+    let App = await import('./App.svelte');
 
-          expect(container).not.toContainHTML('Please check your config...');
-          expect(container).not.toContainHTML('<div>ShowUser</div>');
-          expect(container).not.toContainHTML('<div>Routes</div>');
-        });
-      });
-    });
+    const { container } = render(App);
+    expect(container).toContainHTML('My bad! 😅');
+    expect(container).toContainHTML('<div>SignIn</div>');
+
+    expect(container).not.toContainHTML('Please check your config...');
+    expect(container).not.toContainHTML('<div>ShowUser</div>');
+    expect(container).not.toContainHTML('<div>Routes</div>');
   });
-  it('should render component when logged in', () => {
+  it('should render component when logged in', async () => {
     setupMockModules(MockUser, firebaseConfigMock);
-    return import('sveltefire').then(sveltefire => {
-      return import('./config/firebaseConfig').then(config => {
-        return import('./App.svelte').then(App => {
-          const { container } = render(App);
+    await import('sveltefire');
+    await import('./config/firebaseConfig');
+    let App = await import('./App.svelte');
+    const { container } = render(App);
 
-          expect(container).toContainHTML('My bad! 😅');
-          expect(container).toContainHTML('<div>ShowUser</div>');
-          expect(container).toContainHTML('<div>Routes</div>');
+    expect(container).toContainHTML('My bad! 😅');
+    expect(container).toContainHTML('<div>ShowUser</div>');
+    expect(container).toContainHTML('<div>Routes</div>');
 
-          expect(container).not.toContainHTML('Please check your config...');
-          expect(container).not.toContainHTML('<div>SignIn</div>');
-        });
-      });
-    });
+    expect(container).not.toContainHTML('Please check your config...');
+    expect(container).not.toContainHTML('<div>SignIn</div>');
   });
-  it('should fail when firebase config is not good', () => {
+  it('should fail when firebase config is not good', async () => {
     setupMockModules(MockUser, {});
-    return import('sveltefire').then(sveltefire => {
-      return import('./config/firebaseConfig').then(config => {
-        return import('./App.svelte').then(App => {
-          const { container } = render(App);
-          expect(container).toContainHTML('Please check your config...');
-        });
-      });
-    });
+    await import('sveltefire');
+    await import('./config/firebaseConfig');
+    let App = await import('./App.svelte');
+    const { container } = render(App);
+
+    expect(container).toContainHTML('Please check your config...');
   });
 });
