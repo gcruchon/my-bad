@@ -1,7 +1,7 @@
 import utils from './utils';
 
 describe('asyncForEach', () => {
-  const waitForIt = (ms) => new Promise(r => setTimeout(r, 50));
+  const waitForIt = () => new Promise(r => setTimeout(r, 50));
   const mock1 = jest.fn();
   const mock2 = jest.fn();
   const mock3 = jest.fn();
