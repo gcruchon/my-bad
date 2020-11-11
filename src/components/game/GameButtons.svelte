@@ -17,7 +17,7 @@
   <p class="next">
     <button
       on:click={() => gameRef.update({ state: 'finished', finishedAt: Date.now() })}>
-      Terminer le jeu!
+      Terminer le jeu !
     </button>
   </p>
 {:else}
@@ -27,7 +27,7 @@
           state: 'preQuestion',
           currentQuestionIndex: nextQuestionIndex,
         })}>
-      Prochaine question!
+      Prochaine question !
     </button>
   </p>
   <p class="next">
