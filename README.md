@@ -6,6 +6,8 @@
 
 Ce jeu vise à partager, au sein d'un équipe, les notions d'erreur, faute et échec.
 
+Le jeu est UP & Running à cette adresse (infra de test) : [https://my-bad-game.web.app/](https://my-bad-game.web.app/).
+
 ## Licence
 
 Ce jeu écrit par [Gilles CRUCHON](https://github.com/gcruchon/) est sous licence [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/)
