@@ -2,6 +2,7 @@ import { render } from '@testing-library/svelte';
 import { navigate } from 'svelte-routing';
 import Routes from './Routes.svelte';
 
+jest.unmock('svelte');
 jest.mock('./components/game/GameHost.svelte');
 jest.mock('./components/player/PlayerHome.svelte');
 jest.mock('./components/player/PlayerEnterPin.svelte');
