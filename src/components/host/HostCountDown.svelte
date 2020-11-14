@@ -1,18 +1,20 @@
 <script>
-  import { onDestroy } from "svelte";
-  import HostEndStep from "../host/HostEndStep.svelte";
+  import { onDestroy } from 'svelte';
+  import HostEndStep from './HostEndStep.svelte';
 
   export let gameRef;
   export let numberOfSeconds = 5;
-  export let nextState = "question";
-  export let endStepLabel = "Passer !";
+  export let nextState = 'question';
+  export let endStepLabel = 'Passer !';
 
   let count = 0;
-  $: remaining = numberOfSeconds - count;
+  let remaining = numberOfSeconds - count;
+  $: timerText = `Timer : ${remaining} sec.`;
 
   const increment = () => {
-    if (remaining > 0) {
+    if (remaining > 1) {
       count++;
+      remaining = numberOfSeconds - count;
     } else {
       clearInterval(interval);
       gameRef.update({
@@ -35,8 +37,6 @@
 </style>
 
 <p>
-  Timer :
-  {remaining}
-  sec.
+  {timerText}
   <HostEndStep {gameRef} {nextState} label={endStepLabel} />
 </p>
