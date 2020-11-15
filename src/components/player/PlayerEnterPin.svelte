@@ -9,7 +9,7 @@
   }
 </style>
 
-<p>Entrer l'ID du jeu: <input type="text" bind:value={localGameShortId} /></p>
+<p>Entrer l'ID du jeu : <input type="text" bind:value={localGameShortId} /></p>
 <p>
   <button on:click={() => navigate(`/player/${localGameShortId}`)}>
     Jouer !
