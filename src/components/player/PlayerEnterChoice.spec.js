@@ -316,7 +316,7 @@ describe('PlayerEnterChoice', () => {
     setupMockModules(MockCollectionEnterChoiceOnePlayerNoAnswer);
     await import('sveltefire');
     let PlayerEnterChoice = await import('./PlayerEnterChoice.svelte');
-    const { getByText, queryAllByText, container } = render(PlayerEnterChoice, {
+    const { queryAllByText, container } = render(PlayerEnterChoice, {
       props: {
         userId: 'my-long-useirId',
         game: gameTooLateToAnswer,
