@@ -34,7 +34,7 @@
     </p>
   {:else if games.length > 1}
     <p>
-      Nous avons trouvé plusieurs jeux avec ce l'ID "", c'est embarrassant...
+      Nous avons trouvé plusieurs jeux avec ce l'ID "{gameShortId}", c'est embarrassant...
     </p>
     <p>
       <button on:click={() => navigate('/player')}>
