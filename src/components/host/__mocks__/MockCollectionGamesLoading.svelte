@@ -8,7 +8,7 @@
   export let once = false;
 </script>
 
-<div>MockCollectionGamesEmpty</div>
+<div>MockCollectionGamesLoading</div>
 <slot name="before" />
 
 <slot name="loading" />
