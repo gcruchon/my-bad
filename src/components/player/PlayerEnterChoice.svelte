@@ -1,16 +1,10 @@
 <script>
   import { Collection } from "sveltefire";
+  import { saveAnswer } from "./player";
   export let userId;
   export let game;
 
   const questionId = game.questions[game.currentQuestionIndex];
-
-  const saveAnswer = (answersRef, questionId, value) =>
-    answersRef.add({
-      questionId: questionId,
-      value: value,
-      createdAt: Date.now(),
-    });
 </script>
 
 <style>
@@ -29,7 +23,7 @@
     <p>Vous n'êtes pas inscrit à ce jeu... désolé</p>
   {:else if players.length > 1}
     <p>
-      Nous avons trouvé plusieurs joueurs nvous correspondant, c'est
+      Nous avons trouvé plusieurs joueurs vous correspondant, c'est
       embarrassant...
     </p>
   {:else}
@@ -65,7 +59,7 @@
         {/if}
       {:else if answers.length > 1}
         <p>
-          Nous avons trouvé plusieurs réponse pour cette question, c'est
+          Nous avons trouvé plusieurs réponses pour cette question, c'est
           embarrassant...
         </p>
       {:else}
