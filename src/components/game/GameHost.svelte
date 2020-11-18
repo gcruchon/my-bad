@@ -7,6 +7,7 @@
   import GameButtons from './GameButtons.svelte';
   import GameShowAnswerButton from './GameShowAnswerButton.svelte';
   import GameFinish from './GameFinish.svelte';
+  import GameDebrief from './GameDebrief.svelte';
   import QuestionHeader from '../question/QuestionHeader.svelte';
   import HostCountDown from '../host/HostCountDown.svelte';
   import QuestionText from '../question/QuestionText.svelte';
@@ -73,5 +74,6 @@
     <!-- FINISHED -->
   {:else if game.state === 'finished'}
     <GameFinish />
+    <GameDebrief />
   {/if}
 </Doc>
