@@ -1,6 +1,6 @@
 {
   "name": "my-bad",
-  "version": "0.1.0-beta",
+  "version": "0.1.1-beta",
   "description": "Game to better understand the notion of error, mistake, failure.",
   "main": "main.js",
   "scripts": {
