@@ -11,14 +11,14 @@ describe('Home', () => {
   it('should render component', async () => {
     const { getByText } = render(Home);
 
-    const title = getByText('Vous êtes...');
+    const title = getByText('Vous souhaitez ...');
     expect(title).toBeInTheDocument();
     expect(title).toBeInstanceOf(HTMLHeadingElement);
   });
   it('should have a host button', async () => {
     const { getByText } = render(Home);
 
-    const buttonHost = getByText(/Un animateur/i);
+    const buttonHost = getByText(/Animer un jeu/i);
     expect(buttonHost).toBeInTheDocument();
     expect(buttonHost).toBeInstanceOf(HTMLButtonElement);
     await fireEvent.click(buttonHost);
@@ -28,7 +28,7 @@ describe('Home', () => {
   it('should have a player button', async () => {
     const { getByText } = render(Home);
 
-    const buttonPlayer = getByText(/Un joueur/i);
+    const buttonPlayer = getByText(/Rejoindre un jeu existant/i);
     expect(buttonPlayer).toBeInTheDocument();
     expect(buttonPlayer).toBeInstanceOf(HTMLButtonElement);
     await fireEvent.click(buttonPlayer);

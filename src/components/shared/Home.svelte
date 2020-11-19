@@ -13,6 +13,6 @@
   }
 </style>
 
-<h2>Vous êtes...</h2>
-<p><button on:click={() => navigate('/host')}> Un animateur </button></p>
-<p><button on:click={() => navigate('/player')}> Un joueur </button></p>
+<h2>Vous souhaitez ...</h2>
+<p><button on:click={() => navigate('/host')}> Animer un jeu </button></p>
+<p><button on:click={() => navigate('/player')}> Rejoindre un jeu existant </button></p>
