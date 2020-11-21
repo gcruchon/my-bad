@@ -9,6 +9,7 @@
   export let showExplanation = false;
 
   const questionId = game.questions[game.currentQuestionIndex];
+  const questionSetId = game.questionSetId || 'default';
 
   const mdToHtml = text => {
     return DOMPurify.sanitize(marked(text.replace(/\\n/gi, "\n")));
@@ -53,15 +54,15 @@
 
 <Collection
   path={`questions`}
-  query={(ref) => ref.where('questionId', '==', questionId)}
+  query={(ref) => ref.where('questionId', '==', questionId).where('questionSetId', '==', questionSetId)}
   let:data={questions}
   let:first={question}
   log>
   {#if questions.length == 0}
-    <p>Oups, aucune question ne correspond à l'ID "{questionId}"</p>
+    <p>Oups, aucune question ne correspond à l'ID "{questionId}" pour le questionSetId "{questionSetId}"</p>
   {:else if questions.length > 1}
     <p>
-      Nous avons trouvé plusieurs questions avec l'ID "{questionId}", c'est
+      Nous avons trouvé plusieurs questions avec l'ID "{questionId}" pour le questionSetId "{questionSetId}", c'est
       embarrassant...
     </p>
   {:else}

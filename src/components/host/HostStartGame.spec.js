@@ -24,11 +24,13 @@ jest.mock('../../utils', () => {
     ...mockedFunctions,
   };
 });
+jest.mock('../questionset/QuestionSetList.svelte');
 
 describe('HostStartGame', () => {
   it('should have a button to start the game', async () => {
-    const { getByText } = render(HostStartGame, { props: { userId } });
+    const { getByText, container } = render(HostStartGame, { props: { userId } });
 
+    expect(container).toContainHTML('<div>QuestionSetList</div>');
     const buttonStart = getByText(/Initier un jeu !/i);
     expect(buttonStart).toBeInTheDocument();
     expect(buttonStart).toBeInstanceOf(HTMLButtonElement);

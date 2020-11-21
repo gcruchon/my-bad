@@ -14,7 +14,7 @@ describe('QuestionResults', () => {
     getAnswers.mockClear();
     showPlayers.mockClear();
   });
-  it('should wait fot promise to resolve', async () => {
+  it('should wait for promise to resolve', async () => {
     const QuestionResults = await import('./QuestionResults.svelte');
     const { container } = render(QuestionResults, {
       props: {

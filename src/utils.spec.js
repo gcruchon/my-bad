@@ -72,21 +72,9 @@ describe('getRandomQuestions', () => {
     utils.shuffle = jest.fn().mockReturnValue(reversedArray);
   });
 
-  it('should thrown an error if called with 21', () => {
-    expect(() => {
-      utils.getRandomQuestions(21);
-    }).toThrow('You ask too many questions!');
-  });
-
   it('should get a random array', () => {
     const randomized = utils.getRandomQuestions(20);
     expect(utils.shuffle).toHaveBeenCalledTimes(1);
     expect(randomized).toEqual(reversedArray);
-  });
-
-  it('should slice array when called with 5', () => {
-    const randomized = utils.getRandomQuestions(5);
-    expect(utils.shuffle).toHaveBeenCalledTimes(1);
-    expect(randomized).toEqual([20, 19, 18, 17, 16]);
   });
 });

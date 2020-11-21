@@ -1,5 +1,3 @@
-const NUMBER_OF_AVAILABLE_QUESTIONS = 20;
-
 export const asyncForEach = async (enumObject, callback) => {
   const promises = [];
 
@@ -28,12 +26,8 @@ export const shuffle = (array) => {
 };
 
 export const getRandomQuestions = (numberOfQuestions) => {
-  if(numberOfQuestions > NUMBER_OF_AVAILABLE_QUESTIONS) {
-    throw 'You ask too many questions!';
-  }
-  const orderedArray = Array.from(Array(NUMBER_OF_AVAILABLE_QUESTIONS + 1).keys()).slice(1, NUMBER_OF_AVAILABLE_QUESTIONS + 1);
-  const shuffledArray = utils.shuffle(orderedArray);
-  return shuffledArray.slice(0, numberOfQuestions);
+  const orderedArray = Array.from(Array(numberOfQuestions + 1).keys()).slice(1, numberOfQuestions + 1);
+  return utils.shuffle(orderedArray);
 }
 
 const utils = {
