@@ -10,8 +10,12 @@ const game = {
 };
 
 describe('QuestionResults', () => {
+  afterEach(() => {
+    getAnswers.mockClear();
+    showPlayers.mockClear();
+  });
   it('should wait fot promise to resolve', async () => {
-    let QuestionResults = await import('./QuestionResults.svelte');
+    const QuestionResults = await import('./QuestionResults.svelte');
     const { container } = render(QuestionResults, {
       props: {
         game: game,
@@ -19,9 +23,10 @@ describe('QuestionResults', () => {
       },
     });
     expect(container).toContainHTML('Chargement de réponses en cours...');
+    expect(getAnswers).toBeCalledTimes(1);
   });
   it('should show results', async () => {
-    let QuestionResults = await import('./QuestionResults.svelte');
+    const QuestionResults = await import('./QuestionResults.svelte');
     const { container } = render(QuestionResults, {
       props: {
         game: game,
@@ -30,8 +35,15 @@ describe('QuestionResults', () => {
     });
     await new Promise(setTimeout);
     expect(container).toContainHTML('Liste des résultats');
-    expect(container).toContainHTML('"erreur" : Player One');
-    expect(container).toContainHTML('"faute" : Player Two, Player Three');
-    expect(container).toContainHTML('"échec" : --');
+    expect(getAnswers).toBeCalledTimes(1);
+    expect(showPlayers).toBeCalledTimes(3);
+    expect(showPlayers.mock.calls[0][0]).toEqual([
+      { userId: 'Player1', name: 'Player One' },
+    ]);
+    expect(showPlayers.mock.calls[1][0]).toEqual([
+      { userId: 'Player2', name: 'Player Two' },
+      { userId: 'Player3', name: 'Player Three' },
+    ]);
+    expect(showPlayers.mock.calls[2][0]).toEqual([]);
   });
 });
