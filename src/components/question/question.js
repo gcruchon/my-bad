@@ -10,7 +10,7 @@ export const getAnswers = async (db, gameId, questionId) => {
   const playerSnapshot = await db.collection(`games/${gameId}/players`).get();
 
   await asyncForEach(playerSnapshot, async (player) => {
-    const playerId = player.data().userId;
+    const playerData = player.data();
     const answerSnapshot = await player.ref
       .collection("answers")
       .where("questionId", "==", questionId)
@@ -21,16 +21,32 @@ export const getAnswers = async (db, gameId, questionId) => {
 
       switch (answerValue) {
         case "error":
-          results.errors.push(playerId);
+          results.errors.push(playerData);
           break;
         case "mistake":
-          results.mistakes.push(playerId);
+          results.mistakes.push(playerData);
           break;
         case "failure":
-          results.failures.push(playerId);
+          results.failures.push(playerData);
           break;
       }
     });
   });
   return results;
+};
+
+
+export const showPlayers = (players) => {
+  if(players.length) {
+    let listOfPlayers = '';
+    players.forEach((player, index) => {
+      if(index) {
+        listOfPlayers += ', ';
+      }
+      listOfPlayers += player.name;
+    });
+    return listOfPlayers;
+  } else {
+    return '--';
+  }
 };

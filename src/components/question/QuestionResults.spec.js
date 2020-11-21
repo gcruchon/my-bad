@@ -1,21 +1,7 @@
 import { render } from '@testing-library/svelte';
+import { getAnswers, showPlayers } from './question';
 
-const mockGetAnswers = jest.fn().mockImplementation(() => {
-  return new Promise((resolve, reject) => {
-    resolve({
-      errors: ['Player1'],
-      mistakes: ['Player2', 'Player3'],
-      failures: [],
-    });
-  });
-});
-jest.mock('./question', () => {
-  return {
-    __esModule: true,
-    default: { getAnswers: mockGetAnswers },
-    getAnswers: mockGetAnswers,
-  };
-});
+jest.mock('./question');
 
 const game = {
   state: 'showResults',
@@ -44,8 +30,8 @@ describe('QuestionResults', () => {
     });
     await new Promise(setTimeout);
     expect(container).toContainHTML('Liste des résultats');
-    expect(container).toContainHTML('"erreur" : 1');
-    expect(container).toContainHTML('"faute" : 2');
-    expect(container).toContainHTML('"échec" : 0');
+    expect(container).toContainHTML('"erreur" : Player One');
+    expect(container).toContainHTML('"faute" : Player Two, Player Three');
+    expect(container).toContainHTML('"échec" : --');
   });
 });

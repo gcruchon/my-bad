@@ -1,6 +1,6 @@
 <script>
   import { getContext } from 'svelte';
-  import { getAnswers } from './question';
+  import { getAnswers, showPlayers } from './question';
 
   export let gameId;
   export let game;
@@ -27,16 +27,16 @@
   <h4>Liste des résultats</h4>
   <ul>
     <li>
-      Nombre de réponses
-      <span class="error">"erreur" : {results.errors.length}</span>
+      Réponses
+      <span class="error">"erreur" : {showPlayers(results.errors)}</span>
     </li>
     <li>
-      Nombre de réponses
-      <span class="mistake">"faute" : {results.mistakes.length}</span>
+      Réponses
+      <span class="mistake">"faute" : {showPlayers(results.mistakes)}</span>
     </li>
     <li>
-      Nombre de réponses
-      <span class="failure">"échec" : {results.failures.length}</span>
+      Réponses
+      <span class="failure">"échec" : {showPlayers(results.failures)}</span>
     </li>
   </ul>
 {:catch error}
