@@ -7,7 +7,7 @@
 
   const app = getContext("firebase").getFirebase();
   const db = app.firestore();
-  const nanoid = customAlphabet("123456789ABCDEFGHJKLMNPQRSTUVWYZ", 8);
+  const nanoid = customAlphabet("123456789ABCDEFGHJKLMNPQRSTUVWYZ", 6);
 </script>
 
 <style>
