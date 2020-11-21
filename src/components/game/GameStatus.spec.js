@@ -1,4 +1,4 @@
-import { render, fireEvent } from '@testing-library/svelte';
+import { render } from '@testing-library/svelte';
 import GameStatus from './GameStatus.svelte';
 
 const gameNotStarted = {
@@ -11,7 +11,7 @@ const gameStarted = {
   questions: [1, 2, 3],
 };
 
-describe('GameButtons', () => {
+describe('GameStatus', () => {
   it('should fail beautifully game has an unknown state', async () => {
     const strangeGame = {
       state: 'WTF',
