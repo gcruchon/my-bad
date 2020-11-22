@@ -40,7 +40,7 @@ describe('GamePlayerList', () => {
     expect(container).toContainHTML('Liste des joueurs inscrits');
     expect(container).toContainHTML('Chargement des joueurs...');
 
-    expect(container).not.toContainHTML('En attente des joueurs...');
+    expect(container).not.toContainHTML('En attente de joueurs...');
 
   });
   it('should handle when nobody has registered to the game', async () => {
@@ -54,7 +54,7 @@ describe('GamePlayerList', () => {
     });
 
     expect(container).toContainHTML('Liste des joueurs inscrits');
-    expect(container).toContainHTML('En attente des joueurs...');
+    expect(container).toContainHTML('En attente de joueurs...');
 
     expect(container).not.toContainHTML('Chargement des joueurs...');
   });
@@ -79,7 +79,7 @@ describe('GamePlayerList', () => {
     expect(gameRef.update).toHaveBeenCalledTimes(1);
     expect(gameRef.update).toHaveBeenCalledWith({ state: 'preQuestion' });
 
-    expect(container).not.toContainHTML('En attente des joueurs...');
+    expect(container).not.toContainHTML('En attente de joueurs...');
     expect(container).not.toContainHTML('Chargement des joueurs...');
   });
 });

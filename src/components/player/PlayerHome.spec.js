@@ -64,7 +64,7 @@ describe('PlayerHome', () => {
     expect(container).not.toContainHTML(`<div>QuestionHeader</div>`);
     expect(container).not.toContainHTML(`<div>PlayerEnterChoice</div>`);
     expect(container).not.toContainHTML(`<div>GameFinish</div>`);
-    expect(container).not.toContainHTML(`Tenez-vous prêt.e !`);
+    expect(container).not.toContainHTML(`Tenez-vous prêt•e !`);
     expect(container).not.toContainHTML(`Statut non géré`);
     expect(container).not.toContainHTML(
       "Nous n'avons pas trouvé le jeu avec l'ID ",
@@ -97,11 +97,11 @@ describe('PlayerHome', () => {
     expect(container).not.toContainHTML(`<div>QuestionHeader</div>`);
     expect(container).not.toContainHTML(`<div>PlayerEnterChoice</div>`);
     expect(container).not.toContainHTML(`<div>GameFinish</div>`);
-    expect(container).not.toContainHTML(`Tenez-vous prêt.e !`);
+    expect(container).not.toContainHTML(`Tenez-vous prêt•e !`);
     expect(container).not.toContainHTML('Chargement en cours...');
     expect(container).not.toContainHTML(`Statut non géré`);
   });
-  it('should handle when several games are not found', async () => {
+  it('should handle when several games are found', async () => {
     setupMockModules(MockCollectionHomeTwoGames);
     await import('sveltefire');
     let { navigate } = await import('svelte-routing');
@@ -125,7 +125,7 @@ describe('PlayerHome', () => {
     expect(container).not.toContainHTML(`<div>QuestionHeader</div>`);
     expect(container).not.toContainHTML(`<div>PlayerEnterChoice</div>`);
     expect(container).not.toContainHTML(`<div>GameFinish</div>`);
-    expect(container).not.toContainHTML(`Tenez-vous prêt.e !`);
+    expect(container).not.toContainHTML(`Tenez-vous prêt•e !`);
     expect(container).not.toContainHTML(`Statut non géré`);
   });
   it('should handle a game with a strange status', async () => {
@@ -143,7 +143,7 @@ describe('PlayerHome', () => {
     expect(container).toContainHTML(`Statut non géré`);
 
     expect(container).not.toContainHTML('Chargement en cours...');
-    expect(container).not.toContainHTML(`Tenez-vous prêt.e !`);
+    expect(container).not.toContainHTML(`Tenez-vous prêt•e !`);
     expect(container).not.toContainHTML(`<div>PlayerEnterChoice</div>`);
     expect(container).not.toContainHTML(`<div>GameFinish</div>`);
     expect(container).not.toContainHTML(
@@ -170,7 +170,7 @@ describe('PlayerHome', () => {
     expect(container).not.toContainHTML(`<div>QuestionHeader</div>`);
     expect(container).not.toContainHTML(`<div>PlayerEnterChoice</div>`);
     expect(container).not.toContainHTML(`<div>GameFinish</div>`);
-    expect(container).not.toContainHTML(`Tenez-vous prêt.e !`);
+    expect(container).not.toContainHTML(`Tenez-vous prêt•e !`);
     expect(container).not.toContainHTML(`Statut non géré`);
     expect(container).not.toContainHTML(
       "Nous n'avons pas trouvé le jeu avec l'ID ",
@@ -191,7 +191,7 @@ describe('PlayerHome', () => {
     });
     expect(container).toContainHTML(`<div>GameHeader</div>`);
     expect(container).toContainHTML(`<div>QuestionHeader</div>`);
-    expect(container).toContainHTML(`Tenez-vous prêt.e !`);
+    expect(container).toContainHTML(`Tenez-vous prêt•e !`);
 
     expect(container).not.toContainHTML('Chargement en cours...');
     expect(container).not.toContainHTML(`<div>PlayerEnterName</div>`);
@@ -224,7 +224,7 @@ describe('PlayerHome', () => {
       expect(container).not.toContainHTML(`<div>PlayerEnterName</div>`);
       expect(container).not.toContainHTML(`<div>GameFinish</div>`);
       expect(container).not.toContainHTML(`Statut non géré`);
-      expect(container).not.toContainHTML(`Tenez-vous prêt.e !`);
+      expect(container).not.toContainHTML(`Tenez-vous prêt•e !`);
       expect(container).not.toContainHTML(
         "Nous n'avons pas trouvé le jeu avec l'ID ",
       );
@@ -250,7 +250,7 @@ describe('PlayerHome', () => {
     expect(container).not.toContainHTML(`<div>PlayerEnterName</div>`);
     expect(container).not.toContainHTML(`<div>QuestionHeader</div>`);
     expect(container).not.toContainHTML(`<div>PlayerEnterChoice</div>`);
-    expect(container).not.toContainHTML(`Tenez-vous prêt.e !`);
+    expect(container).not.toContainHTML(`Tenez-vous prêt•e !`);
     expect(container).not.toContainHTML(`Statut non géré`);
     expect(container).not.toContainHTML(
       "Nous n'avons pas trouvé le jeu avec l'ID ",

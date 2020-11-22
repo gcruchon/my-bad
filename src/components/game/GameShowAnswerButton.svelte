@@ -9,9 +9,10 @@
   }
 </style>
 
-
 <p class="next">
-  <button on:click={() => gameRef.update({ state: 'showAnswer' })}>
+  <button
+    class="btn btn-primary"
+    on:click={() => gameRef.update({ state: 'showAnswer' })}>
     Voir la réponse !
   </button>
 </p>

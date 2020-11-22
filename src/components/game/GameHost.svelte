@@ -18,15 +18,23 @@
 </script>
 
 <Doc path={`games/${gameId}`} let:data={game} let:ref={gameRef} log>
-  <GameHeader shortId={game.shortId} createdAt={game.createdAt} withLink={true} withDateCreated={true} />
+  <GameHeader
+    shortId={game.shortId}
+    createdAt={game.createdAt}
+    withLink={true}
+    withDateCreated={true} />
 
-  <span slot="loading">Chargement du jeu...</span>
-  <span slot="fallback">
-    Aucun jeu trouvé avec cet ID ("{gameId}").
-    <button on:click={() => navigate('/host')}>
-      Retourner à l'accueil de l'animateur
-    </button>
-  </span>
+  <p class="text-center" slot="loading">Chargement du jeu...</p>
+  <div class="text-center my-3" slot="fallback">
+    <p class="alert alert-danger" role="alert">
+      Aucun jeu trouvé avec cet ID ("{gameId}").
+    </p>
+    <p>
+      <button class="btn btn-primary" on:click={() => navigate('/host')}>
+        Retourner à l'accueil de l'animateur
+      </button>
+    </p>
+  </div>
 
   <!-- WAITING FOR PLAYERS -->
   {#if game.state === 'waitingForPlayers'}

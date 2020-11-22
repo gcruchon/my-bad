@@ -19,9 +19,6 @@
 
 <!-- Styles -->
 <style>
-  main {
-    padding: 0 1.5em;
-  }
   :global(.error) {
     color: purple;
     font-weight: bold;
@@ -34,6 +31,9 @@
     color: olive;
     font-weight: bold;
   }
+  :global(.btn .oi) {
+    padding-right: .3em;
+  }
 </style>
 
 {#if !firebaseConfig.projectId}<strong>Please check your config...</strong>{/if}
@@ -41,14 +41,14 @@
   <User persist={sessionStorage} let:user let:auth>
     <ShowUser {user} {auth} />
 
-    <main>
+    <main class="container">
       <Title />
 
       <Routes userId={user.uid} />
     </main>
 
     <div slot="signed-out">
-      <main>
+      <main class="container">
         <Title />
         <SignIn {auth} {firebase} />
       </main>

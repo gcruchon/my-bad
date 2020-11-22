@@ -13,7 +13,7 @@ describe('Home', () => {
 
     const title = getByText('Vous souhaitez ...');
     expect(title).toBeInTheDocument();
-    expect(title).toBeInstanceOf(HTMLHeadingElement);
+    expect(title).toBeInstanceOf(HTMLParagraphElement);
   });
   it('should have a host button', async () => {
     const { getByText } = render(Home);

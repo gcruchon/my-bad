@@ -113,7 +113,7 @@ describe('PlayerEnterName', () => {
       },
     });
 
-    expect(container).toContainHTML('Vous êtes inscrit.e, Player One');
+    expect(container).toContainHTML('Vous êtes inscrit•e, Player One');
     expect(container).toContainHTML("Le jeu n'a pas encore démarré.");
     expect(container).not.toContainHTML('Entrer votre nom :');
     expect(container).not.toContainHTML('Chargement en cours...');

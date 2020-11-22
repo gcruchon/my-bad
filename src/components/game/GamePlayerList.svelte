@@ -4,74 +4,58 @@
 </script>
 
 <style>
-  h2 {
-    text-align: center;
-  }
-  .player__box {
-    float: left;
-    margin: 0.5em;
-    padding: 0.5em;
-    background-color: #eeeeee;
-  }
-  .player__empty {
-    text-align: center;
-    font-weight: bold;
-  }
-  .player__name {
-    font-weight: bold;
-    font-style: italic;
-    font-size: 110%;
-  }
-  .player__list {
-    text-align: center;
-    margin: 1em;
-  }
-  .start {
-    clear: both;
-    margin-top: 2em;
-    text-align: center;
-  }
-  .tips {
-    padding: 1em 0;
-    margin: 1em 0;
-  }
-  .tips p, .tips ul {
-    margin: 0;
+  .btn.btn-primary .oi {
+    padding-right: 0;
+    font-size: 80%;
   }
 </style>
 
-<h2>Liste des joueurs inscrits</h2>
-<div class="tips">
-  <p>Tips :</p>
+<div class="alert alert-info" role="alert">
+  <p class="font-weight-bold m-0">
+    <span class="oi oi-info pr-1" />
+    Conseils :
+  </p>
   <ul>
-    <li>Pour jouer, créez une visioconférence et partagez votre écran.</li>
+    <li>
+      Pour jouer, créez une visioconférence et
+      <em class="font-weight-bold">partagez votre écran</em>.
+    </li>
     <li>
       Demandez aux joueurs de se connecter via mobile et fournissez-leur le lien
       indiqué ci-dessus !
     </li>
   </ul>
 </div>
+<p class="h4 text-center">Liste des joueurs inscrits</p>
 <Collection
   path={gameRef.collection('players')}
   query={ref => ref.orderBy('createdAt')}
   let:data={players}
   log>
   {#if !players.length}
-    <p class="player__empty">En attente des joueurs...</p>
+    <p class="text-center">
+      <span class="oi oi-timer pr-1 mt-4" />En attente de joueurs...
+    </p>
   {:else}
-    <p class="player__list">
+    <p class="m-3 clearfix">
       {#each players as player}
-        <div class="player__box">
-          <span class="player__name">{player.name}</span>
-          <button on:click={() => player.ref.delete()}>🗑</button>
+        <div
+          class="alert alert-primary rounded-pill m-3 pt-1 pb-0 px-4 float-left">
+          <span class="font-weight-bold font-italic pr-2">{player.name}</span>
+          <button
+            class="btn btn-primary py-1 px-2"
+            on:click={() => player.ref.delete()}><span
+              class="oi oi-trash" /></button>
         </div>
       {/each}
     </p>
   {/if}
-  <p class="start">
-    <button on:click={() => gameRef.update({ state: 'preQuestion' })}>
+  <p class="text-center mt-4">
+    <button
+      class="btn btn-success"
+      on:click={() => gameRef.update({ state: 'preQuestion' })}>
       Commencer la partie !
     </button>
   </p>
-  <span slot="loading">Chargement des joueurs...</span>
+  <p class="text-center" slot="loading">Chargement des joueurs...</p>
 </Collection>

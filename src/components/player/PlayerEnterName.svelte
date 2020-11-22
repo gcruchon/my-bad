@@ -8,12 +8,6 @@
   $: playerName = '';
 </script>
 
-<style>
-  p {
-    text-align: center;
-  }
-</style>
-
 <Collection
   path={`games/${gameId}/players`}
   query={ref => ref.where('userId', '==', userId)}
@@ -22,20 +16,25 @@
   let:first={currentPlayer}
   log>
   {#if players.length == 0}
-    <p>Entrer votre nom : <input type="text" bind:value={playerName} /></p>
-    <p>
-      <button on:click={() => addPlayer(playersRef, userId, playerName)}>
+    <p class="text-center my-4">
+      Entrer votre nom :
+      <input type="text" bind:value={playerName} />
+    </p>
+    <p class="text-center my-4">
+      <button class="btn btn-primary" on:click={() => addPlayer(playersRef, userId, playerName)}>
         Jouer !
       </button>
     </p>
   {:else if players.length > 1}
-    <p>
+    <p class="alert alert-danger text-center my-4" role="alert">
       Nous avons trouvé plusieurs joueurs vous correspondant, c'est
       embarrassant...
     </p>
   {:else}
-    <p>Vous êtes inscrit.e, {currentPlayer.name}</p>
-    <p>Le jeu n'a pas encore démarré.</p>
+    <div class="alert alert-info text-center my-4" role="alert">
+      <p>Vous êtes inscrit•e, {currentPlayer.name}</p>
+      <p class="font-weight-bold">Le jeu n'a pas encore démarré.</p>
+    </div>
   {/if}
-  <span slot="loading">Chargement en cours...</span>
+  <p class="text-center my-4" slot="loading">Chargement en cours...</p>
 </Collection>

@@ -9,12 +9,6 @@
   let promise = getQuestionSetList(db);
 </script>
 
-<style>
-  p {
-    text-align: center;
-  }
-</style>
-
 {#await promise}
   <p>Chargement types de jeu...</p>
 {:then questionSetList}

@@ -6,23 +6,20 @@
   const isLastQuestion = nextQuestionIndex >= game.questions.length;
 </script>
 
-<style>
-  .next {
-    padding: 2em;
-    text-align: center;
-  }
-</style>
-
 {#if isLastQuestion}
-  <p class="next">
+  <p class="text-center mt-4 pb-5">
     <button
-      on:click={() => gameRef.update({ state: 'finished', finishedAt: Date.now() })}>
+      on:click={() => gameRef.update({
+          state: 'finished',
+          finishedAt: Date.now(),
+        })}>
       Terminer le jeu !
     </button>
   </p>
 {:else}
-  <p class="next">
+  <p class="text-center mt-4">
     <button
+      class="btn btn-primary"
       on:click={() => gameRef.update({
           state: 'preQuestion',
           currentQuestionIndex: nextQuestionIndex,
@@ -30,10 +27,13 @@
       Prochaine question !
     </button>
   </p>
-  <p class="next">
+  <p class="text-center pb-5">
     <a
       href={'#'}
-      on:click={() => gameRef.update({ state: 'finished', finishedAt: Date.now() })}>
+      on:click={() => gameRef.update({
+          state: 'finished',
+          finishedAt: Date.now(),
+        })}>
       Terminer le jeu !
     </a>
   </p>

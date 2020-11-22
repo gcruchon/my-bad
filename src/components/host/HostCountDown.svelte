@@ -30,13 +30,7 @@
   });
 </script>
 
-<style>
-  p {
-    text-align: center;
-  }
-</style>
-
-<p>
+<p class="text-center">
   {timerText}
   <HostEndStep {gameRef} {nextState} label={endStepLabel} />
 </p>

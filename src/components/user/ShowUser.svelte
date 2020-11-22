@@ -31,22 +31,21 @@
 
 <style>
   p {
-    text-align: right;
-    margin: 0;
     background-color: #dddddd;
-    padding: 0.8em 0.5em 0.5em 0.5em;
   }
   em {
     font-size: 60%;
-    color: #555;
   }
 </style>
 
-<p>
+<p class="text-right m-0 mb-3 p-2 pt-3">
   Salut,
   {#if user.isAnonymous}
-    cher.e Anonyme !
-    <em>({user.uid})</em>
+    cher•e Anonyme !
+    <em class="text-muted">({user.uid})</em>
   {:else}{user.displayName} !{/if}
-  <button on:click={() => signOut(db, user.uid, auth)}>Me déconnecter</button>
+  <button class="btn btn-outline-secondary" on:click={() => signOut(db, user.uid, auth)}>
+    <span class="d-inline d-sm-none oi oi-account-logout"></span>
+    <span class="d-none d-sm-inline">Me déconnecter</span>
+  </button>
 </p>

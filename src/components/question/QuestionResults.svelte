@@ -11,20 +11,10 @@
   let promise = getAnswers(db, gameId, questionId);
 </script>
 
-<style>
-  h4 {
-    font-size: 120%;
-    margin-bottom: 0;
-  }
-  ul {
-    margin-top: 0.5em;
-  }
-</style>
-
 {#await promise}
-  <p>Chargement de réponses en cours...</p>
+  <p class="text-center">Chargement de réponses en cours...</p>
 {:then results}
-  <h4>Liste des résultats</h4>
+  <p class="h4 mt-4">Liste des résultats</p>
   <ul>
     <li>
       Réponses
@@ -40,5 +30,5 @@
     </li>
   </ul>
 {:catch error}
-  <p style="color: red">{error.message}</p>
+  <p class="alert alert-danger" role="alert">{error.message}</p>
 {/await}

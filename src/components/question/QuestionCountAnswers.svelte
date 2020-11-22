@@ -7,18 +7,6 @@
   $: countAnswers = 0;
 </script>
 
-<style>
-  p {
-    font-size: 80%;
-  }
-  span {
-    background-color: #eee;
-    padding: 0.4em;
-    color: #444;
-    font-style: italic;
-  }
-</style>
-
 <p>
   Réponses reçues :
   <Collection path={gameRef.collection('players')} let:data={players} log>
@@ -28,7 +16,7 @@
         query={(ref) => ref.where('questionId', '==', questionId)}
         let:data={answers}
         log>
-        {#if answers.length}<span>{player.name}</span>{/if}
+        {#if answers.length}<span class="badge badge-pill badge-info">{player.name}</span>{/if}
         <span slot="loading">Chargement...</span>
       </Collection>
     {/each}

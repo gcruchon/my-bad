@@ -1,45 +1,42 @@
 <script>
-  import { Collection } from "sveltefire";
-  import { navigate } from "svelte-routing";
-  import GameStatus from "../game/GameStatus.svelte";
-  import HostStartGame from "./HostStartGame.svelte";
+  import { Collection } from 'sveltefire';
+  import { navigate } from 'svelte-routing';
+  import GameStatus from '../game/GameStatus.svelte';
+  import HostStartGame from './HostStartGame.svelte';
   export let userId;
 </script>
 
 <style>
-  .info {
-    text-align: center;
-    font-weight: bold;
-    color: olive;
-  }
-  .game__empty {
-    text-align: center;
-  }
-  .game__list {
-    margin-bottom: 0;
+  .small {
+    font-size: 80%;
   }
 </style>
 
-<h2>Liste des jeux en cours</h2>
+<p class="h4">Liste des jeux en cours</p>
 <Collection
   path={'games'}
-  query={(ref) => ref
+  query={ref => ref
       .where('creatorId', '==', userId)
       .where('state', '!=', 'finished')}
   let:data={inProgressGames}
   log>
   {#if !inProgressGames.length}
-    <p class="game__empty">Aucun jeu en cours.</p>
+    <p class="text-center">Aucun jeu en cours.</p>
   {:else}
-    <ul class="game__list">
+    <ul>
       {#each inProgressGames as game}
         <li>
-          {game.shortId}
-          - créé le
-          {new Date(game.createdAt).toLocaleString()}
+          <span class="font-weight-bold">{game.shortId}</span>
+          <span class="small">
+            créé le
+            {new Date(game.createdAt).toLocaleString()}
+          </span>
           -
           <GameStatus {game} />
-          <button on:click={() => navigate(`/host/${game.id}`)}>
+          <button
+            class="btn btn-primary"
+            on:click={() => navigate(`/host/${game.id}`)}>
+            <span class="oi oi-media-play" />
             Jouer !
           </button>
         </li>
@@ -49,34 +46,33 @@
   {#if inProgressGames.length < 3}
     <HostStartGame {userId} />
   {:else}
-    <p class="info">Vous ne pouvez pas avoir plus de 3 jeux en cours.</p>
+    <p class="alert alert-info mt-4" role="alert">Vous ne pouvez pas avoir plus de 3 jeux en cours.</p>
   {/if}
   <span slot="loading">Chargement des jeux...</span>
 </Collection>
 
-<h2>Liste des jeux terminés</h2>
+<p class="h4 text-secondary mt-4">Liste des jeux terminés</p>
 <Collection
   path={'games'}
-  query={(ref) => ref
+  query={ref => ref
       .where('creatorId', '==', userId)
       .where('state', '==', 'finished')}
   let:data={finishedGames}
   log>
   {#if !finishedGames.length}
-    <p class="game__empty">Aucun jeu terminé.</p>
+    <p class="text-secondary text-center">Aucun jeu terminé.</p>
   {:else}
-    <p class="game__list">Liste des jeux en terminés :</p>
-    <ul>
+    <ul class="text-secondary">
       {#each finishedGames as game}
         <li>
-          {game.shortId}
-          - créé le
-          {new Date(game.createdAt).toLocaleString()}
-          - terminé le
-          {new Date(game.finishedAt).toLocaleString()}
+          <span class="font-weight-bold">{game.shortId}</span>
+          <span class="small">
+            terminé le
+            {new Date(game.finishedAt).toLocaleString()}
+          </span>
         </li>
       {/each}
     </ul>
   {/if}
-  <span slot="loading">Chargement des jeux...</span>
+  <span class="text-secondary" slot="loading">Chargement des jeux...</span>
 </Collection>

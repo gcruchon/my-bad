@@ -9,4 +9,4 @@
   }
 </style>
 
-<h4>Question n°{game.currentQuestionIndex + 1}</h4>
+<p class="h4 text-center my-4">Question n°{game.currentQuestionIndex + 1}</p>

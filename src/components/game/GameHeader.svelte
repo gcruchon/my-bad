@@ -10,19 +10,8 @@
 </script>
 
 <style>
-  h2 {
-    text-align: center;
-  }
-  p.started {
-    margin-top: .5em;
+  .small {
     font-size: 80%;
-    color: #999999;
-    text-align: center;
-  }
-  p.link {
-    margin-top: .5em;
-    font-size: 80%;
-    text-align: center;
   }
   span {
     background-color: #dddddd;
@@ -31,13 +20,13 @@
   }
 </style>
 
-<h2>ID du jeu : <span>{shortId}</span></h2>
+<p class="h4 text-center mt-4">ID du jeu : <span>{shortId}</span></p>
 {#if withLink}
-  <p class="link">
+  <p class="text-center my-2 link small">
     Lien à partager :
     <Link to={link}>{`${getCurrentBaseURL()}${link}`}</Link>
   </p>
 {/if}
 {#if withDateCreated}
-  <p class="started">Jeu commencé le {new Date(createdAt).toLocaleString()}</p>
+  <p class="text-center text-muted started my-2 small">Jeu commencé le {new Date(createdAt).toLocaleString()}</p>
 {/if}

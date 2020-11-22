@@ -1,6 +1,6 @@
 <script>
-  import { Collection } from "sveltefire";
-  import marked from "marked";
+  import { Collection } from 'sveltefire';
+  import marked from 'marked';
   import DOMPurify from 'dompurify';
 
   export let game;
@@ -12,68 +12,39 @@
   const questionSetId = game.questionSetId || 'default';
 
   const mdToHtml = text => {
-    return DOMPurify.sanitize(marked(text.replace(/\\n/gi, "\n")));
-  }
+    return DOMPurify.sanitize(marked(text.replace(/\\n/gi, '\n')));
+  };
 </script>
-
-<style>
-  .situation {
-    background-color: rgb(227, 245, 251);
-    margin: 1em 0;
-    padding: 1em;
-  }
-  .situation p {
-    margin: 1em;
-  }
-  .situation .situation__title {
-    text-align: center;
-    font-weight: bold;
-    font-size: 120%;
-    margin: 0 0 1em 0;
-  }
-  .answer {
-    font-weight: bold;
-    font-size: 140%;
-    text-align: center;
-  }
-  .explanation {
-    background-color:#eeeeee;
-    margin: 1em 0;
-    padding: 1em;
-  }
-  .explanation p {
-    margin: 1em;
-  }
-  .explanation .explanation__title {
-    text-align: center;
-    font-weight: bold;
-    font-size: 120%;
-    margin: 0 0 1em 0;
-  }
-</style>
 
 <Collection
   path={`questions`}
-  query={(ref) => ref.where('questionId', '==', questionId).where('questionSetId', '==', questionSetId)}
+  query={ref => ref
+      .where('questionId', '==', questionId)
+      .where('questionSetId', '==', questionSetId)}
   let:data={questions}
   let:first={question}
   log>
   {#if questions.length == 0}
-    <p>Oups, aucune question ne correspond à l'ID "{questionId}" pour le questionSetId "{questionSetId}"</p>
+    <p class="alert alert-danger text-center">
+      Oups, aucune question ne correspond à l'ID "{questionId}" pour le
+      questionSetId "{questionSetId}"
+    </p>
   {:else if questions.length > 1}
-    <p>
-      Nous avons trouvé plusieurs questions avec l'ID "{questionId}" pour le questionSetId "{questionSetId}", c'est
-      embarrassant...
+    <p class="alert alert-danger text-center">
+      Nous avons trouvé plusieurs questions avec l'ID "{questionId}" pour le
+      questionSetId "{questionSetId}", c'est embarrassant...
     </p>
   {:else}
     {#if showSituation}
-      <div class="situation">
-        <p class="situation__title">Situation</p>
-        <p>{@html mdToHtml(question.situation)}</p>
+      <div class="alert alert-primary">
+        <p class="font-weight-bold text-center">Situation</p>
+        <p>
+          {@html mdToHtml(question.situation)}
+        </p>
       </div>
     {/if}
     {#if showAnswer}
-      <p class="answer">
+      <p class="h4 text-center font-weight-bold my-4">
         Réponse :
         {#if question.answer === 'error'}
           <span class="error">Erreur</span>
@@ -85,11 +56,15 @@
       </p>
     {/if}
     {#if showExplanation}
-    <div class="explanation">
-      <p class="explanation__title">Explication</p>
-      <p>{@html mdToHtml(question.explanation)}</p>
-    </div>
+      <div class="alert alert-success">
+        <p class="font-weight-bold text-center">Explication</p>
+        <p>
+          {@html mdToHtml(question.explanation)}
+        </p>
+      </div>
     {/if}
   {/if}
-  <span slot="loading">Chargement de la question en cours...</span>
+  <p class="text-center" slot="loading">
+    Chargement de la question en cours...
+  </p>
 </Collection>

@@ -22,34 +22,23 @@
   const nanoid = customAlphabet('123456789ABCDEFGHJKLMNPQRSTUVWYZ', 6);
 </script>
 
-<style>
-  p {
-    text-align: center;
-  }
-  div {
-      margin: 2em;
-      border: #ccc 1px dashed;
-      padding: 1em;
-      background-color: #eee;
-  }
-</style>
-
-<div>
-  <QuestionSetList {db} bind:questionSet onChange={() => changeQuestionSet()} />
-  <p>
-    <button
-      on:click={() => db
-          .collection('games')
-          .add({
-            shortId: nanoid(),
-            creatorId: userId,
-            state: 'waitingForPlayers',
-            questionSetId,
-            currentQuestionIndex: 0,
-            questions: getRandomQuestions(numberOfQuestions),
-            createdAt: Date.now(),
-          })}>
-      Initier un jeu !
-    </button>
-  </p>
-</div>
+<p class="h4 mt-4">Initier un nouveau jeu</p>
+<QuestionSetList {db} bind:questionSet onChange={() => changeQuestionSet()} />
+<p>
+  <button
+    class="btn btn-secondary"
+    on:click={() => db
+        .collection('games')
+        .add({
+          shortId: nanoid(),
+          creatorId: userId,
+          state: 'waitingForPlayers',
+          questionSetId,
+          currentQuestionIndex: 0,
+          questions: getRandomQuestions(numberOfQuestions),
+          createdAt: Date.now(),
+        })}>
+    <span class="oi oi-plus" />
+    Initier un jeu !
+  </button>
+</p>
