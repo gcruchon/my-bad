@@ -58,21 +58,6 @@
   $: error_msg = '';
 </script>
 
-<style>
-  hr {
-    height: 1px;
-    border: none;
-    background: rgb(195, 195, 195);
-  }
-  .error {
-    color: red;
-  }
-  .notice {
-    color: #555;
-    font-style: italic;
-  }
-</style>
-
 <div class="alert alert-info my-5" role="alert">
   <p>
     Vous souhaitez démarrer une partie ? Que vous en soyez l'animateur•trice ou
@@ -103,7 +88,7 @@
   Me connecter avec Facebook
 </button>
 {#if error_msg != ''}
-  <p class="error">
+  <p class="alert alert-danger">
     {@html error_msg}
   </p>
 {/if}
