@@ -16,30 +16,71 @@ describe('GameHeader', () => {
         ...mockedFunctions,
       };
     });
-  };
-  it('indicate the game ID, provide a link and indicate when it started', async () => {
-    setupMockModules();
-    return import('svelte-routing').then(svelteRouting => {
-      return import('./GameHeader.svelte').then(GameHeader => {
-        const { getByText, container } = render(GameHeader, {
-          props: {
-            shortId: 'ABCDEFG',
-            createdAt,
-          },
-        });
-        expect(container).toContainHTML('ID du jeu :');
-        const gameIdSpan = getByText('ABCDEFG');
-        expect(gameIdSpan).toBeInTheDocument();
-        expect(gameIdSpan).toBeInstanceOf(HTMLSpanElement);
-
-        expect(container).toContainHTML('Lien à partager :');
-        const link = getByText('https://my-bad-game.web.app/player/ABCDEFG');
-        expect(link).toBeInTheDocument();
-        expect(link).toBeInstanceOf(HTMLAnchorElement);
-        expect(link.href).toEqual('http://localhost/player/ABCDEFG');
-
-        expect(container).toContainHTML(`Jeu commencé le ${new Date(createdAt).toLocaleString()}`);
-      });
+    const mockGetCurrentBaseURL = jest.fn().mockImplementation(() => {
+      return 'http://localhost';
     });
+    jest.doMock('../../utils', () => {
+      return {
+        __esModule: true,
+        default: { getCurrentBaseURL: mockGetCurrentBaseURL },
+        getCurrentBaseURL: mockGetCurrentBaseURL,
+      };
+    });
+  };
+  it('indicate the game ID', async () => {
+    setupMockModules();
+    await import('svelte-routing');
+    const GameHeader = await import('./GameHeader.svelte');
+    const { getByText, container } = render(GameHeader, {
+      props: {
+        shortId: 'ABCDEFG',
+        createdAt,
+      },
+    });
+    expect(container).toContainHTML('ID du jeu :');
+    const gameIdSpan = getByText('ABCDEFG');
+    expect(gameIdSpan).toBeInTheDocument();
+    expect(gameIdSpan).toBeInstanceOf(HTMLSpanElement);
+
+    expect(container).not.toContainHTML('Lien à partager :');
+    expect(container).not.toContainHTML(
+      `Jeu commencé le ${new Date(createdAt).toLocaleString()}`,
+    );
+  });
+  it('can provide a link if asked to', async () => {
+    setupMockModules();
+    await import('svelte-routing');
+    const GameHeader = await import('./GameHeader.svelte');
+    const { getByText, container } = render(GameHeader, {
+      props: {
+        shortId: 'ABCDEFG',
+        withLink: true,
+        createdAt,
+      },
+    });
+
+    expect(container).toContainHTML('Lien à partager :');
+    const link = getByText('http://localhost/player/ABCDEFG');
+    expect(link).toBeInTheDocument();
+    expect(link).toBeInstanceOf(HTMLAnchorElement);
+    expect(link.href).toEqual('http://localhost/player/ABCDEFG');
+  });
+  it('can indicate when it started if asked to', async () => {
+    setupMockModules();
+    await import('svelte-routing');
+    const GameHeader = await import('./GameHeader.svelte');
+    const { container } = render(GameHeader, {
+      props: {
+        shortId: 'ABCDEFG',
+        withDateCreated: true,
+        createdAt,
+      },
+    });
+    expect(container).toContainHTML('ID du jeu :');
+    expect(container).toContainHTML(
+      `Jeu commencé le ${new Date(createdAt).toLocaleString()}`,
+    );
+
+    expect(container).not.toContainHTML('Lien à partager :');
   });
 });

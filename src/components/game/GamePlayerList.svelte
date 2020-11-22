@@ -1,10 +1,10 @@
 <script>
-  import { Collection } from "sveltefire";
+  import { Collection } from 'sveltefire';
   export let gameRef;
 </script>
 
 <style>
-  h3 {
+  h2 {
     text-align: center;
   }
   .player__box {
@@ -31,18 +31,33 @@
     margin-top: 2em;
     text-align: center;
   }
+  .tips {
+    padding: 1em 0;
+    margin: 1em 0;
+  }
+  .tips p, .tips ul {
+    margin: 0;
+  }
 </style>
 
-<h3>Liste des joueurs inscrits</h3>
+<h2>Liste des joueurs inscrits</h2>
+<div class="tips">
+  <p>Tips :</p>
+  <ul>
+    <li>Pour jouer, créez une visioconférence et partagez votre écran.</li>
+    <li>
+      Demandez aux joueurs de se connecter via mobile et fournissez-leur le lien
+      indiqué ci-dessus !
+    </li>
+  </ul>
+</div>
 <Collection
   path={gameRef.collection('players')}
-  query={(ref) => ref.orderBy('createdAt')}
+  query={ref => ref.orderBy('createdAt')}
   let:data={players}
   log>
   {#if !players.length}
-  <p class="player__empty">
-    En attente des joueurs...
-  </p>
+    <p class="player__empty">En attente des joueurs...</p>
   {:else}
     <p class="player__list">
       {#each players as player}

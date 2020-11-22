@@ -30,6 +30,10 @@ export const getRandomQuestions = (numberOfQuestions) => {
   return utils.shuffle(orderedArray);
 }
 
+export const getCurrentBaseURL = () => {
+  return window.location.origin;
+}
+
 const utils = {
   asyncForEach,
   shuffle,

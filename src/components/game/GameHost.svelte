@@ -18,7 +18,7 @@
 </script>
 
 <Doc path={`games/${gameId}`} let:data={game} let:ref={gameRef} log>
-  <GameHeader shortId={game.shortId} createdAt={game.createdAt} />
+  <GameHeader shortId={game.shortId} createdAt={game.createdAt} withLink={true} withDateCreated={true} />
 
   <span slot="loading">Chargement du jeu...</span>
   <span slot="fallback">
