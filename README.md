@@ -18,3 +18,7 @@ Ce jeu écrit par [Gilles CRUCHON](https://github.com/gcruchon/) est sous licenc
 
 - [Build a “Kahoot!” Clone with AngularJS and Firebase](https://medium.com/@rotemtam/build-a-kahoot-clone-with-angularjs-and-firebase-b8b30891d968)
 - [SvelteFire template](https://github.com/codediodeio/sveltefire-template)
+
+## Librairies tierces
+
+- [Open Iconic](www.useiconic.com/open)
