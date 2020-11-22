@@ -34,10 +34,15 @@ export const getCurrentBaseURL = () => {
   return window.location.origin;
 }
 
+export const focus = (element) => {
+  element.focus();
+};
+
 const utils = {
   asyncForEach,
   shuffle,
   getRandomQuestions,
+  focus,
 }
 
 export default utils;

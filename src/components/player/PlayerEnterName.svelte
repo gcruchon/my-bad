@@ -1,6 +1,7 @@
 <script>
   import { Collection } from 'sveltefire';
   import { addPlayer } from './player';
+  import { focus } from '../../utils';
 
   export let userId;
   export let gameId;
@@ -16,9 +17,9 @@
   let:first={currentPlayer}
   log>
   {#if players.length == 0}
-    <p class="text-center my-4">
-      Entrer votre nom :
-      <input type="text" bind:value={playerName} />
+    <p class="text-center my-4 font-weight-bold">
+      Entrer votre nom :&nbsp;
+      <input type="text" bind:value={playerName} use:focus />
     </p>
     <p class="text-center my-4">
       <button class="btn btn-primary" on:click={() => addPlayer(playersRef, userId, playerName)}>
