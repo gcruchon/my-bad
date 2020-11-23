@@ -37,7 +37,7 @@
 </style>
 
 {#if !firebaseConfig.projectId}<strong>Please check your config...</strong>{/if}
-<FirebaseApp {firebase}>
+<FirebaseApp {firebase} perf analytics>
   <User persist={sessionStorage} let:user let:auth>
     <ShowUser {user} {auth} />
 
