@@ -1,6 +1,25 @@
 <script>
   import { Collection } from 'sveltefire';
+  import { getContext } from 'svelte';
+  import {
+    EVENT_HOST_REMOVE_PLAYER,
+    EVENT_HOST_START_GAME,
+    logEvent,
+  } from '../../analytics';
+
   export let gameRef;
+
+  const firebase = getContext('firebase').getFirebase();
+
+  const removePlayer = player => {
+    logEvent(firebase, EVENT_HOST_REMOVE_PLAYER);
+    player.ref.delete();
+  };
+
+  const startGame = () => {
+    logEvent(firebase, EVENT_HOST_START_GAME);
+    gameRef.update({ state: 'preQuestion' });
+  }
 </script>
 
 <style>
@@ -44,7 +63,7 @@
           <span class="font-weight-bold font-italic pr-2">{player.name}</span>
           <button
             class="btn btn-primary py-1 px-2"
-            on:click={() => player.ref.delete()}><span
+            on:click={() => removePlayer(player)}><span
               class="oi oi-trash" /></button>
         </div>
       {/each}
@@ -53,7 +72,7 @@
   <p class="text-center mt-4">
     <button
       class="btn btn-success"
-      on:click={() => gameRef.update({ state: 'preQuestion' })}>
+      on:click={startGame}>
       Commencer la partie !
     </button>
   </p>

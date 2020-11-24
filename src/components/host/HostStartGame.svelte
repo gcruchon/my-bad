@@ -2,6 +2,7 @@
   import { getContext } from 'svelte';
   import { customAlphabet } from 'nanoid/non-secure';
   import { getRandomQuestions } from '../../utils';
+  import { EVENT_HOST_CREATE_GAME, logEvent } from '../../analytics';
   import QuestionSetList from '../questionset/QuestionSetList.svelte';
 
   export let userId;
@@ -16,10 +17,23 @@
     console.log('numberOfQuestions', numberOfQuestions);
   };
 
-  const app = getContext('firebase').getFirebase();
-  const db = app.firestore();
+  const firebase = getContext('firebase').getFirebase();
+  const db = firebase.firestore();
 
   const nanoid = customAlphabet('123456789ABCDEFGHJKLMNPQRSTUVWYZ', 6);
+
+  const createGame = () => {
+    logEvent(firebase, EVENT_HOST_CREATE_GAME);
+    db.collection('games').add({
+      shortId: nanoid(),
+      creatorId: userId,
+      state: 'waitingForPlayers',
+      questionSetId,
+      currentQuestionIndex: 0,
+      questions: getRandomQuestions(numberOfQuestions),
+      createdAt: Date.now(),
+    });
+  };
 </script>
 
 <p class="h4 mt-4">Initier un nouveau jeu</p>
@@ -27,17 +41,7 @@
 <p>
   <button
     class="btn btn-secondary"
-    on:click={() => db
-        .collection('games')
-        .add({
-          shortId: nanoid(),
-          creatorId: userId,
-          state: 'waitingForPlayers',
-          questionSetId,
-          currentQuestionIndex: 0,
-          questions: getRandomQuestions(numberOfQuestions),
-          createdAt: Date.now(),
-        })}>
+    on:click={createGame}>
     <span class="oi oi-plus" />
     Initier un jeu !
   </button>

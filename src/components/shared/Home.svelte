@@ -1,5 +1,8 @@
 <script>
-  import { navigate } from 'svelte-routing';
+  import { getContext } from 'svelte';
+  import { navitageWithLog } from '../../utils';
+
+  const firebase = getContext('firebase').getFirebase();
 </script>
 
 <p class="alert alert-info my-4">
@@ -10,13 +13,13 @@
 <p class="text-center my-3 font-weight-bold">Vous souhaitez ...</p>
 <button
   class="btn btn-success btn-lg btn-block py-4 font-weight-bolder"
-  on:click={() => navigate('/host')}>
-  <span class="oi oi-bullhorn"></span>
+  on:click={() => navitageWithLog(firebase, '/host')}>
+  <span class="oi oi-bullhorn" />
   Animer un jeu
 </button>
 <button
   class="btn btn-primary btn-lg btn-block py-4 font-weight-bolder"
-  on:click={() => navigate('/player')}>
-  <span class="oi oi-phone"></span>
+  on:click={() => navitageWithLog(firebase, '/player')}>
+  <span class="oi oi-phone" />
   Rejoindre un jeu existant
 </button>

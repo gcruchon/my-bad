@@ -1,10 +1,24 @@
 <script>
+  import {
+    EVENT_LOGIN_ANONYMOUS,
+    EVENT_LOGIN_FACEBOOK,
+    EVENT_LOGIN_FAILED,
+    EVENT_LOGIN_GOOGLE,
+    logEvent,
+  } from '../../analytics';
+
   export let auth;
   export let firebase;
 
-  const loginWithGoogle = () => {
-    const google = new firebase.auth.GoogleAuthProvider();
-    return auth.signInWithPopup(google);
+  const loginWithGoogle = async () => {
+    try {
+      logEvent(firebase, EVENT_LOGIN_GOOGLE);
+      const google = new firebase.auth.GoogleAuthProvider();
+      await auth.signInWithPopup(google);
+    } catch (err) {
+      logEvent(firebase, EVENT_LOGIN_FAILED);
+      error_msg = `Une erreur est survenue...`;
+    }
   };
 
   const supportedProviders = [
@@ -23,11 +37,24 @@
     }
   }
 
+  const loginAnonymously = async () => {
+    try {
+      firebase.analytics().logEvent('login', { method: 'Anonymous' });
+      logEvent(firebase, EVENT_LOGIN_ANONYMOUS);
+      return await auth.signInAnonymously();
+    } catch (err) {
+      logEvent(firebase, EVENT_LOGIN_FAILED);
+      error_msg = `Une erreur est survenue...`;
+    }
+  };
+
   const loginWithFacebook = async () => {
+    logEvent(firebase, EVENT_LOGIN_FACEBOOK);
     const facebook = new firebase.auth.FacebookAuthProvider();
     try {
       await auth.signInWithPopup(facebook);
     } catch (err) {
+      logEvent(firebase, EVENT_LOGIN_FAILED);
       if (
         err.email &&
         err.credential &&
@@ -50,8 +77,6 @@
       } else {
         error_msg = `Une erreur est survenue...`;
       }
-      // Handle errors...
-      // toast.error(err.message || err.toString());
     }
   };
 
@@ -74,21 +99,21 @@
 </div>
 <button
   class="btn btn-success btn-lg btn-block text-center"
-  on:click|preventDefault={() => auth.signInAnonymously()}>
+  on:click|preventDefault={async () => await loginAnonymously()}>
   Me connecter en anonyme
 </button>
 <button
   class="btn btn-primary btn-lg btn-block text-center"
-  on:click|preventDefault={loginWithGoogle}>
+  on:click|preventDefault={async () => await loginWithGoogle()}>
   Me connecter avec Google
 </button>
 <button
   class="btn btn-primary btn-lg btn-block text-center"
-  on:click|preventDefault={loginWithFacebook}>
+  on:click|preventDefault={async () => await loginWithFacebook()}>
   Me connecter avec Facebook
 </button>
 {#if error_msg != ''}
-  <p class="alert alert-danger">
+  <p class="alert alert-danger my-5 text-center">
     {@html error_msg}
   </p>
 {/if}

@@ -1,6 +1,7 @@
 <script>
-  import { Collection } from 'sveltefire';
-  import { navigate } from 'svelte-routing';
+    import { getContext } from 'svelte';
+import { Collection } from 'sveltefire';
+import { navitageWithLog } from '../../utils';
 
   import PlayerEnterName from './PlayerEnterName.svelte';
   import PlayerEnterChoice from './PlayerEnterChoice.svelte';
@@ -10,6 +11,8 @@
 
   export let userId;
   export let gameShortId = '';
+
+const firebase = getContext('firebase').getFirebase();
 </script>
 
 <Collection
@@ -24,7 +27,7 @@
       Nous n'avons pas trouvé le jeu avec l'ID "{gameShortId}"
     </p>
     <p class="text-center">
-      <button class="btn btn-primary" on:click={() => navigate('/player')}>
+      <button class="btn btn-primary" on:click={() => navitageWithLog(firebase, '/player')}>
         Saisir un autre ID de jeu
       </button>
     </p>
@@ -33,7 +36,7 @@
       {`Nous avons trouvé plusieurs jeux avec ce l'ID "${gameShortId}", c'est embarrassant...`}
     </p>
     <p class="text-center">
-      <button class="btn btn-primary" on:click={() => navigate('/player')}>
+      <button class="btn btn-primary" on:click={() => navitageWithLog(firebase, '/player')}>
         Saisir un autre ID de jeu
       </button>
     </p>

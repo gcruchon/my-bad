@@ -1,6 +1,7 @@
 <script>
+  import { getContext } from 'svelte';
   import { Doc } from 'sveltefire';
-  import { navigate } from 'svelte-routing';
+  import { navitageWithLog } from '../../utils';
 
   import GameHeader from './GameHeader.svelte';
   import GamePlayerList from './GamePlayerList.svelte';
@@ -15,6 +16,8 @@
   import QuestionCountAnswers from '../question/QuestionCountAnswers.svelte';
 
   export let gameId;
+
+  const firebase = getContext('firebase').getFirebase();
 </script>
 
 <Doc path={`games/${gameId}`} let:data={game} let:ref={gameRef} log>
@@ -30,7 +33,9 @@
       Aucun jeu trouvé avec cet ID ("{gameId}").
     </p>
     <p>
-      <button class="btn btn-primary" on:click={() => navigate('/host')}>
+      <button
+        class="btn btn-primary"
+        on:click={() => navitageWithLog(firebase, '/host')}>
         Retourner à l'accueil de l'animateur
       </button>
     </p>

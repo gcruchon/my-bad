@@ -1,9 +1,13 @@
 <script>
+  import { getContext } from 'svelte';
   import { Collection } from 'sveltefire';
-  import { navigate } from 'svelte-routing';
+  import { navitageWithLog } from '../../utils';
   import GameStatus from '../game/GameStatus.svelte';
   import HostStartGame from './HostStartGame.svelte';
+
   export let userId;
+
+  const firebase = getContext('firebase').getFirebase();
 </script>
 
 <style>
@@ -35,7 +39,7 @@
           <GameStatus {game} />
           <button
             class="btn btn-primary"
-            on:click={() => navigate(`/host/${game.id}`)}>
+            on:click={() => navitageWithLog(firebase, `/host/${game.id}`)}>
             <span class="oi oi-media-play" />
             Jouer !
           </button>
@@ -46,7 +50,9 @@
   {#if inProgressGames.length < 3}
     <HostStartGame {userId} />
   {:else}
-    <p class="alert alert-info mt-4" role="alert">Vous ne pouvez pas avoir plus de 3 jeux en cours.</p>
+    <p class="alert alert-info mt-4" role="alert">
+      Vous ne pouvez pas avoir plus de 3 jeux en cours.
+    </p>
   {/if}
   <span slot="loading">Chargement des jeux...</span>
 </Collection>
