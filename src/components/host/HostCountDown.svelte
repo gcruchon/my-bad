@@ -1,11 +1,19 @@
 <script>
-  import { onDestroy } from 'svelte';
+  import { onDestroy, getContext } from 'svelte';
   import HostEndStep from './HostEndStep.svelte';
+  import { getEventFromState, logEvent } from '../../analytics';
 
   export let gameRef;
   export let numberOfSeconds = 5;
   export let nextState = 'question';
   export let endStepLabel = 'Passer !';
+
+  const firebase = getContext('firebase').getFirebase();
+
+  const changeState = () => {
+    logEvent(firebase, getEventFromState(nextState));
+    gameRef.update({ state: nextState });
+  };
 
   let count = 0;
   let remaining = numberOfSeconds - count;
@@ -17,9 +25,7 @@
       remaining = numberOfSeconds - count;
     } else {
       clearInterval(interval);
-      gameRef.update({
-        state: nextState,
-      });
+      changeState();
     }
   };
 

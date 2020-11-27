@@ -1,10 +1,19 @@
 <script>
+  import { getContext } from 'svelte';
   import { Collection } from 'sveltefire';
   import { saveAnswer } from './player';
+  import { EVENT_PLAYER_ANSWER, logEvent } from '../../analytics';
   export let userId;
   export let game;
 
   const questionId = game.questions[game.currentQuestionIndex];
+
+  const firebase = getContext('firebase').getFirebase();
+
+  const saveAnswerWithLog = (answersRef, questionId, value) => {
+    logEvent(firebase, EVENT_PLAYER_ANSWER);
+    saveAnswer(answersRef, questionId, value);
+  };
 </script>
 
 <style>
@@ -42,19 +51,19 @@
           <p class="text-center">
             <button
               class="btn btn-light btn-lg btn-block my-4 py-4 border border-secondary"
-              on:click={() => saveAnswer(answersRef, questionId, 'error')}>
+              on:click={() => saveAnswerWithLog(answersRef, questionId, 'error')}>
               une
               <span class="error">erreur</span>
             </button>
             <button
               class="btn btn-light btn-lg btn-block my-4 py-4 border border-secondary"
-              on:click={() => saveAnswer(answersRef, questionId, 'mistake')}>
+              on:click={() => saveAnswerWithLog(answersRef, questionId, 'mistake')}>
               une
               <span class="mistake">faute</span>
             </button>
             <button
               class="btn btn-light btn-lg btn-block my-4 py-4 border border-secondary"
-              on:click={() => saveAnswer(answersRef, questionId, 'failure')}>
+              on:click={() => saveAnswerWithLog(answersRef, questionId, 'failure')}>
               un
               <span class="failure">échec</span>
             </button>

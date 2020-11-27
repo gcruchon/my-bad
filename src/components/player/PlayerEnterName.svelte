@@ -1,12 +1,21 @@
 <script>
+  import { getContext } from 'svelte';
   import { Collection } from 'sveltefire';
   import { addPlayer } from './player';
   import { focus } from '../../utils';
+  import { EVENT_PLAYER_JOIN_GAME, logEvent } from '../../analytics';
 
   export let userId;
   export let gameId;
 
   $: playerName = '';
+
+  const firebase = getContext('firebase').getFirebase();
+
+  const addPlayerWithLog = (playersRef, userId, playerName) => {
+    logEvent(firebase, EVENT_PLAYER_JOIN_GAME);
+    addPlayer(playersRef, userId, playerName);
+  };
 </script>
 
 <Collection
@@ -22,7 +31,9 @@
       <input type="text" bind:value={playerName} use:focus />
     </p>
     <p class="text-center my-4">
-      <button class="btn btn-primary" on:click={() => addPlayer(playersRef, userId, playerName)}>
+      <button
+        class="btn btn-primary"
+        on:click={() => addPlayerWithLog(playersRef, userId, playerName)}>
         Jouer !
       </button>
     </p>
