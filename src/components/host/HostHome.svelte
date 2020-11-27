@@ -10,12 +10,6 @@
   const firebase = getContext('firebase').getFirebase();
 </script>
 
-<style>
-  .small {
-    font-size: 80%;
-  }
-</style>
-
 <p class="h4">Liste des jeux en cours</p>
 <Collection
   path={'games'}

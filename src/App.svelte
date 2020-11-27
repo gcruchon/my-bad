@@ -34,6 +34,9 @@
   :global(.btn .oi) {
     padding-right: .3em;
   }
+  :global(.small) {
+    font-size: 80%;
+  }
 </style>
 
 {#if !firebaseConfig.projectId}<strong>Please check your config...</strong>{/if}

@@ -36,12 +36,15 @@
     </p>
   {:else}
     {#if showSituation}
-      <div class="alert alert-primary">
+      <div class="alert alert-primary mb-0">
         <p class="font-weight-bold text-center">Situation</p>
         <p>
           {@html mdToHtml(question.situation)}
         </p>
       </div>
+      <p class="text-right font-italic text-muted mt-0 small">
+        Situation {questionId}
+      </p>
     {/if}
     {#if showAnswer}
       <p class="h4 text-center font-weight-bold my-4">

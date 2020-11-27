@@ -10,9 +10,6 @@
 </script>
 
 <style>
-  .small {
-    font-size: 80%;
-  }
   span {
     background-color: #dddddd;
     padding: .2em .4em;
