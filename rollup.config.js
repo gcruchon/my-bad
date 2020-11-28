@@ -7,6 +7,7 @@ import { terser } from 'rollup-plugin-terser';
 import json from '@rollup/plugin-json';
 import copy from 'rollup-plugin-copy';
 import babel from '@rollup/plugin-babel';
+import bundleSize from 'rollup-plugin-bundle-size';
 import rimraf from 'rimraf';
 import { customAlphabet } from 'nanoid';
 
@@ -76,6 +77,7 @@ export default {
         targets: [{ src: ['public/*', '!public/build'], dest: 'dist' }],
       }),
     production && generateIndexHtml(),
+    production && bundleSize(),
   ],
   watch: {
     clearScreen: false,

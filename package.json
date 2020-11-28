@@ -49,6 +49,7 @@
     "nanoid": "^3.1.16",
     "rimraf": "^3.0.2",
     "rollup": "^2.33.0",
+    "rollup-plugin-bundle-size": "^1.0.3",
     "rollup-plugin-copy": "^3.3.0",
     "rollup-plugin-livereload": "^2.0.0",
     "rollup-plugin-svelte": "^6.1.0",
