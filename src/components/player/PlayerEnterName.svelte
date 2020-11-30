@@ -1,5 +1,5 @@
 <script>
-  import { getContext } from 'svelte';
+  import { getContext, onMount } from 'svelte';
   import { Collection } from 'sveltefire';
   import { addPlayer } from './player';
   import { focus } from '../../utils';
@@ -8,9 +8,10 @@
   export let userId;
   export let gameId;
 
-  $: playerName = '';
-
   const firebase = getContext('firebase').getFirebase();
+
+  const user = firebase.auth().currentUser;
+  $: playerName = user && user.displayName ? user.displayName : '';
 
   const addPlayerWithLog = (playersRef, userId, playerName) => {
     logEvent(firebase, EVENT_PLAYER_JOIN_GAME);

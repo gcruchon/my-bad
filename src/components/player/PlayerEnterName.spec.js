@@ -28,6 +28,7 @@ describe('PlayerEnterName', () => {
       };
     });
     jest.doMock('svelte-routing');
+    jest.doMock('svelte');
   };
   it('should handle loading players', async () => {
     setupMockModules(MockCollectionEnterNameLoading);
@@ -66,7 +67,7 @@ describe('PlayerEnterName', () => {
     expect(paragraphEnterName).toBeInstanceOf(HTMLParagraphElement);
     expect(paragraphEnterName.childElementCount).toEqual(1);
     const inputName = paragraphEnterName.children[0];
-    await fireEvent.input(inputName, {target: {value: 'Great Player'}});
+    await fireEvent.input(inputName, { target: { value: 'Great Player' } });
     const buttonPlay = getByText('Jouer !');
     await fireEvent.click(buttonPlay);
     expect(mockAddPlayer).toHaveBeenCalledTimes(1);
@@ -101,6 +102,37 @@ describe('PlayerEnterName', () => {
     expect(container).not.toContainHTML('Entrer votre nom :');
     expect(container).not.toContainHTML('Chargement en cours...');
     expect(container).not.toContainHTML("Le jeu n'a pas encore démarré.");
+  });
+  it('should prefill the name when player is logged in non anonymously', async () => {
+    setupMockModules(MockCollectionEnterNameEmpty);
+    const { __authMock__ } = await import('svelte');
+    __authMock__.mockImplementation(() => {
+      return { currentUser: { displayName: 'Great Name To Display' } };
+    });
+    await import('sveltefire');
+    let PlayerEnterName = await import('./PlayerEnterName.svelte');
+    const { queryAllByText, getByText, container } = render(PlayerEnterName, {
+      props: {
+        userId: 'my-long-useirId',
+        gameId: 'SHORTID1',
+      },
+    });
+
+    const paragraphEnterName = getByText('Entrer votre nom :');
+    expect(paragraphEnterName).toBeInTheDocument();
+    expect(paragraphEnterName).toBeInstanceOf(HTMLParagraphElement);
+    expect(paragraphEnterName.childElementCount).toEqual(1);
+    const inputName = paragraphEnterName.children[0];
+
+    expect(inputName.value).toEqual('Great Name To Display');
+
+    expect(container).not.toContainHTML("Le jeu n'a pas encore démarré.");
+    expect(container).not.toContainHTML('Chargement en cours...');
+    expect(
+      queryAllByText(
+        "Nous avons trouvé plusieurs joueurs vous correspondant, c'est embarrassant...",
+      ),
+    ).toHaveLength(0);
   });
   it('should handle when player has entered his name', async () => {
     setupMockModules(MockCollectionEnterNameOnePlayer);

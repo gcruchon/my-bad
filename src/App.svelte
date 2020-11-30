@@ -32,7 +32,7 @@
     font-weight: bold;
   }
   :global(.btn .oi) {
-    padding-right: .3em;
+    padding-right: 0.3em;
   }
   :global(.small) {
     font-size: 80%;

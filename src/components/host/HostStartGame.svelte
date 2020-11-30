@@ -14,7 +14,6 @@
   const changeQuestionSet = () => {
     [questionSetId, numberOfQuestions] = questionSet.split('|');
     numberOfQuestions = parseInt(numberOfQuestions, 10);
-    console.log('numberOfQuestions', numberOfQuestions);
   };
 
   const firebase = getContext('firebase').getFirebase();
