@@ -32,12 +32,16 @@ describe('App', () => {
         ...mockedFunctions,
       };
     });
-    jest.doMock('./config/firebaseConfig', () => {
-      return {
-        __esModule: true,
-        default: firebaseConfig,
-      };
-    });
+    jest.doMock(
+      './config/firebaseConfig',
+      () => {
+        return {
+          __esModule: true,
+          default: firebaseConfig,
+        };
+      },
+      { virtual: true },
+    );
   };
 
   it('should render component when not logged in', async () => {
