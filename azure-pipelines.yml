@@ -1,0 +1,61 @@
+# Node.js with React
+# Build a Node.js project that uses React.
+# Add steps that analyze code, save build artifacts, deploy, and more:
+# https://docs.microsoft.com/azure/devops/pipelines/languages/javascript
+
+trigger:
+- main
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+steps:
+- task: NodeTool@0
+  inputs:
+    versionSpec: '12.x'
+  displayName: 'Install Node.js'
+
+- script: |
+    npm ci
+  displayName: 'npm ci'
+
+- script: |
+    npm test
+  displayName: 'Run Tests'
+
+- task: CmdLine@2
+  displayName: 'Create config file'
+  inputs:
+    script: 'mv firebaseConfig-sample.js firebaseConfig.js'
+    workingDirectory: 'src/config/'
+    failOnStderr: true
+
+- script: |
+    npm run build
+  displayName: 'Run Build'
+
+- task: CopyFiles@2
+  displayName: 'Prepare dist folder'
+  inputs:
+    contents: 'dist/**'
+    targetFolder: $(Build.ArtifactStagingDirectory)
+
+- task: CopyFiles@2
+  displayName: 'Prepare firebase options'
+  inputs:
+    contents: 'firebase.json'
+    targetFolder: $(Build.ArtifactStagingDirectory)
+
+- task: CopyFiles@2
+  displayName: 'Prepare deploy script'
+  inputs:
+    contents: '.azure/Release/deployToFirebase.ps1'
+    targetFolder: $(Build.ArtifactStagingDirectory)
+    flattenFolders: true
+
+- task: PublishBuildArtifacts@1
+  displayName: 'Publish artifact'
+  inputs:
+    PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+    ArtifactName: 'drop'
+    publishLocation: 'Container'
