@@ -1,6 +1,6 @@
 {
   "name": "my-bad",
-  "version": "0.2.3-beta",
+  "version": "0.2.4-beta",
   "description": "Game to better understand the notion of error, mistake, failure.",
   "main": "main.js",
   "scripts": {
@@ -58,6 +58,7 @@
     "svelte": "^3.29.4",
     "svelte-jester": "^1.1.5",
     "svelte-routing": "^1.4.2",
-    "sveltefire": "^0.1.1"
+    "sveltefire": "^0.1.1",
+    "whatwg-fetch": "^3.5.0"
   }
 }
