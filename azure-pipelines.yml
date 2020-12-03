@@ -49,7 +49,7 @@ steps:
 - task: CopyFiles@2
   displayName: 'Prepare deploy script'
   inputs:
-    contents: '.azure/Release/deployToFirebase.ps1'
+    contents: '.azure/Release/deployToFirebase.*'
     targetFolder: $(Build.ArtifactStagingDirectory)
     flattenFolders: true
 
