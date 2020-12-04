@@ -23,6 +23,23 @@ steps:
     npm test
   displayName: 'Run Tests'
 
+- script: |
+    npm run cover
+  displayName: 'Run Coverage'
+
+- task: SonarCloudPrepare@1
+  inputs:
+    SonarCloud: 'SonarCloud'
+    organization: 'gillescruchon'
+    scannerMode: 'CLI'
+    configMode: 'file'
+
+- task: SonarCloudAnalyze@1
+
+- task: SonarCloudPublish@1
+  inputs:
+    pollingTimeoutSec: '300'
+
 - task: CmdLine@2
   displayName: 'Create config file'
   inputs:
