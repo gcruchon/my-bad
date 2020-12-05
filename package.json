@@ -1,8 +1,8 @@
 {
   "name": "my-bad",
-  "version": "0.2.4-beta",
+  "version": "0.2.5",
   "description": "Game to better understand the notion of error, mistake, failure.",
-  "main": "main.js",
+  "main": "app.js",
   "scripts": {
     "build": "rollup -c",
     "dev": "rollup -c -w",

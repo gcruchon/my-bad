@@ -3,22 +3,21 @@ import resolve from '@rollup/plugin-node-resolve';
 import commonjs from '@rollup/plugin-commonjs';
 import livereload from 'rollup-plugin-livereload';
 import replace from '@rollup/plugin-replace';
-import { terser } from 'rollup-plugin-terser';
 import json from '@rollup/plugin-json';
 import copy from 'rollup-plugin-copy';
 import babel from '@rollup/plugin-babel';
 import bundleSize from 'rollup-plugin-bundle-size';
+import babelConfig from './rollup-babel-config';
 import rimraf from 'rimraf';
 import { customAlphabet } from 'nanoid';
-
-import babelConfig from './rollup-babel-config';
+// import { terser } from 'rollup-plugin-terser';
 
 const production = !process.env.ROLLUP_WATCH;
 const buildDirectory = production ? 'dist' : 'public/build';
 const nanoid = customAlphabet('1234567890abcdefghijklmnopqrstuvwxyz', 6);
 
 export default {
-  input: 'src/main.js',
+  input: 'src/app.js',
   output: {
     sourcemap: !production,
     format: 'iife',

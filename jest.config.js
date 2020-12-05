@@ -17,7 +17,7 @@ module.exports = {
     '/node_modules/',
     './src/config/',
     './src/data/',
-    './src/main.js',
+    './src/app.js',
   ],
   resolver: './svelte-resolver.js',
 };
