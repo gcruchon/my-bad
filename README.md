@@ -1,4 +1,4 @@
-[![License: CC BY-NC-SA 4.0](https://img.shields.io/badge/License-CC%20BY--NC--SA%204.0-lightgrey.svg)](https://creativecommons.org/licenses/by-nc-sa/4.0/)
+[![License: CC BY-NC-SA 4.0](https://img.shields.io/badge/License-CC%20BY--NC--SA%204.0-lightgrey.svg)](https://creativecommons.org/licenses/by-nc-sa/4.0/) [![Build Status](https://dev.azure.com/gillescruchon/my-bad/_apis/build/status/gcruchon.my-bad?branchName=main)](https://dev.azure.com/gillescruchon/my-bad/_build/latest?definitionId=1&branchName=main)
 
 # My bad
 
