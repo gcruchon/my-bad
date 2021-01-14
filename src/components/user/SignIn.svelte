@@ -7,6 +7,8 @@
     logEvent,
   } from '../../analytics';
 
+  import authConfig from '../../config/authConfig';
+
   export let auth;
   export let firebase;
 
@@ -88,30 +90,53 @@
     Vous souhaitez démarrer une partie ? Que vous en soyez l'animateur•trice ou
     un•e joueur•euse, vous devez vous connecter.
   </p>
-  <p>
-    Si vous ne souhaitez pas laisser de trace, choisissez "Me connecter en
-    anonyme".
-  </p>
-  <p>
-    Si vous souhaitez pouvoir retrouver vos parties, alors choisissez "Me
-    connecter avec Google" ou "Me connecter avec Facebook".
-  </p>
+  {#if authConfig.anonymous && !authConfig.google && !authConfig.facebook}
+    {#if authConfig.google || authConfig.facebook}
+      <p>
+        Si vous ne souhaitez pas laisser de trace, choisissez "Me connecter en
+        anonyme".
+      </p>
+    {:else}
+      <p>Veuillez cliquer sur "Me connecter en anonyme".</p>
+    {/if}
+  {/if}
+  {#if authConfig.google && authConfig.facebook}
+    <p>
+      Si vous souhaitez pouvoir retrouver vos parties, alors choisissez "Me
+      connecter avec Google" ou "Me connecter avec Facebook".
+    </p>
+  {/if}
+  {#if authConfig.google && !authConfig.facebook}
+    <p>
+      Si vous souhaitez pouvoir retrouver vos parties, alors choisissez "Me
+      connecter avec Google".
+    </p>
+  {/if}
+  {#if !authConfig.google && authConfig.facebook}
+    <p>
+      Si vous souhaitez pouvoir retrouver vos parties, alors choisissez "Me
+      connecter avec Facebook".
+    </p>
+  {/if}
 </div>
-<button
-  class="btn btn-success btn-lg btn-block text-center"
-  on:click|preventDefault={async () => await loginAnonymously()}>
-  Me connecter en anonyme
-</button>
-<button
-  class="btn btn-primary btn-lg btn-block text-center"
-  on:click|preventDefault={async () => await loginWithGoogle()}>
-  Me connecter avec Google
-</button>
-<button
-  class="btn btn-primary btn-lg btn-block text-center"
-  on:click|preventDefault={async () => await loginWithFacebook()}>
-  Me connecter avec Facebook
-</button>
+{#if authConfig.anonymous}
+  <button
+    class="btn btn-success btn-lg btn-block text-center"
+    on:click|preventDefault={async () => await loginAnonymously()}
+  >Me connecter en anonyme</button>
+{/if}
+{#if authConfig.google}
+  <button
+    class="btn btn-primary btn-lg btn-block text-center"
+    on:click|preventDefault={async () => await loginWithGoogle()}
+  >Me connecter avec Google</button>
+{/if}
+{#if authConfig.facebook}
+  <button
+    class="btn btn-primary btn-lg btn-block text-center"
+    on:click|preventDefault={async () => await loginWithFacebook()}
+  >Me connecter avec Facebook</button>
+{/if}
 {#if error_msg != ''}
   <p class="alert alert-danger my-5 text-center">
     {@html error_msg}
@@ -119,6 +144,8 @@
 {/if}
 <p class="alert alert-secondary my-5 text-center" role="alert">
   Aucune donnée personnelle n'est stockée ! Plus de détails ici :
-  <a
-    href="https://firebase.google.com/support/privacy">https://firebase.google.com/support/privacy</a>.
+  <a href="https://firebase.google.com/support/privacy">
+    https://firebase.google.com/support/privacy
+  </a>
+  .
 </p>

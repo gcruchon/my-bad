@@ -48,7 +48,7 @@
     <!-- COUNTDOWN BEFORE QUESTION -->
   {:else if game.state === 'preQuestion'}
     <QuestionHeader {game} />
-    <HostCountDown {gameRef} numberOfSeconds={5} nextState="question" />
+    <HostCountDown {gameRef} numberOfSeconds={3} nextState="question" />
     <!-- ASKING THE QUESTION -->
   {:else if game.state === 'question'}
     <QuestionHeader {game} />
