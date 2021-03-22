@@ -1,10 +1,5 @@
 <script>
   import { getContext } from 'svelte';
-  import {
-    EVENT_HOST_FINISH_GAME,
-    EVENT_HOST_GO_TO_NEXT_QUESTION,
-    logEvent,
-  } from '../../analytics';
 
   export let game;
   export let gameRef;
@@ -15,7 +10,6 @@
   const firebase = getContext('firebase').getFirebase();
 
   const finishGame = () => {
-    logEvent(firebase, EVENT_HOST_FINISH_GAME);
     gameRef.update({
       state: 'finished',
       finishedAt: Date.now(),
@@ -23,7 +17,6 @@
   };
 
   const goToNextQuestion = () => {
-    logEvent(firebase, EVENT_HOST_GO_TO_NEXT_QUESTION);
     gameRef.update({
       state: 'preQuestion',
       currentQuestionIndex: nextQuestionIndex,

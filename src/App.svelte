@@ -4,7 +4,6 @@
   import 'firebase/firestore';
   import 'firebase/auth';
   import 'firebase/performance';
-  import 'firebase/analytics';
 
   import firebaseConfig from './config/firebaseConfig';
 
@@ -40,7 +39,7 @@
 </style>
 
 {#if !firebaseConfig.projectId}<strong>Please check your config...</strong>{/if}
-<FirebaseApp {firebase} perf analytics>
+<FirebaseApp {firebase} perf>
   <User persist={sessionStorage} let:user let:auth>
     <ShowUser {user} {auth} />
 

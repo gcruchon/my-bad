@@ -2,7 +2,6 @@
   import { getContext } from 'svelte';
   import { Collection } from 'sveltefire';
   import { saveAnswer } from './player';
-  import { EVENT_PLAYER_ANSWER, logEvent } from '../../analytics';
   export let userId;
   export let game;
 
@@ -11,7 +10,6 @@
   const firebase = getContext('firebase').getFirebase();
 
   const saveAnswerWithLog = (answersRef, questionId, value) => {
-    logEvent(firebase, EVENT_PLAYER_ANSWER);
     saveAnswer(answersRef, questionId, value);
   };
 </script>

@@ -1,12 +1,10 @@
 <script>
   import { getContext } from 'svelte';
-  import { EVENT_HOST_SHOW_ANSWER, logEvent } from '../../analytics';
   export let gameRef;
 
   const firebase = getContext('firebase').getFirebase();
 
   const showAnswer = () => {
-    logEvent(firebase, EVENT_HOST_SHOW_ANSWER);
     gameRef.update({ state: 'showAnswer' });
   };
 </script>

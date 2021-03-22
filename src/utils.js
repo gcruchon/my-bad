@@ -1,5 +1,4 @@
 import { navigate } from 'svelte-routing';
-import { logEvent, getEventFromLocation } from './analytics';
 
 export const asyncForEach = async (enumObject, callback) => {
   const promises = [];
@@ -46,7 +45,6 @@ export const focus = element => {
 };
 
 export const navitageWithLog = (firebase, to) => {
-  logEvent(firebase, getEventFromLocation(to));
   navigate(to);
 };
 

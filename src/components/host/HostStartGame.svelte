@@ -2,7 +2,6 @@
   import { getContext } from 'svelte';
   import { customAlphabet } from 'nanoid/non-secure';
   import { getRandomQuestions } from '../../utils';
-  import { EVENT_HOST_CREATE_GAME, logEvent } from '../../analytics';
   import QuestionSetList from '../questionset/QuestionSetList.svelte';
 
   export let userId;
@@ -22,7 +21,6 @@
   const nanoid = customAlphabet('123456789ABCDEFGHJKLMNPQRSTUVWYZ', 6);
 
   const createGame = () => {
-    logEvent(firebase, EVENT_HOST_CREATE_GAME);
     db.collection('games').add({
       shortId: nanoid(),
       creatorId: userId,

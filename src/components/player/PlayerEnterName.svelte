@@ -3,7 +3,6 @@
   import { Collection } from 'sveltefire';
   import { addPlayer } from './player';
   import { focus } from '../../utils';
-  import { EVENT_PLAYER_JOIN_GAME, logEvent } from '../../analytics';
 
   export let userId;
   export let gameId;
@@ -14,7 +13,6 @@
   $: playerName = user && user.displayName ? user.displayName : '';
 
   const addPlayerWithLog = (playersRef, userId, playerName) => {
-    logEvent(firebase, EVENT_PLAYER_JOIN_GAME);
     addPlayer(playersRef, userId, playerName);
   };
 </script>

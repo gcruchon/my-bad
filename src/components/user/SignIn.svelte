@@ -1,12 +1,4 @@
 <script>
-  import {
-    EVENT_LOGIN_ANONYMOUS,
-    EVENT_LOGIN_FACEBOOK,
-    EVENT_LOGIN_FAILED,
-    EVENT_LOGIN_GOOGLE,
-    logEvent,
-  } from '../../analytics';
-
   import authConfig from '../../config/authConfig';
 
   export let auth;
@@ -14,11 +6,9 @@
 
   const loginWithGoogle = async () => {
     try {
-      logEvent(firebase, EVENT_LOGIN_GOOGLE);
       const google = new firebase.auth.GoogleAuthProvider();
       await auth.signInWithPopup(google);
     } catch (err) {
-      logEvent(firebase, EVENT_LOGIN_FAILED);
       error_msg = `Une erreur est survenue...`;
     }
   };
@@ -41,22 +31,17 @@
 
   const loginAnonymously = async () => {
     try {
-      firebase.analytics().logEvent('login', { method: 'Anonymous' });
-      logEvent(firebase, EVENT_LOGIN_ANONYMOUS);
       return await auth.signInAnonymously();
     } catch (err) {
-      logEvent(firebase, EVENT_LOGIN_FAILED);
       error_msg = `Une erreur est survenue...`;
     }
   };
 
   const loginWithFacebook = async () => {
-    logEvent(firebase, EVENT_LOGIN_FACEBOOK);
     const facebook = new firebase.auth.FacebookAuthProvider();
     try {
       await auth.signInWithPopup(facebook);
     } catch (err) {
-      logEvent(firebase, EVENT_LOGIN_FAILED);
       if (
         err.email &&
         err.credential &&

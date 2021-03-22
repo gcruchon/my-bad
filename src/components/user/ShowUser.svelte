@@ -2,7 +2,6 @@
   import { getContext } from 'svelte';
   import { hasGamesInProgress, cleanUpUser } from './user';
   import { navitageWithLog } from '../../utils';
-  import { EVENT_LOGOUT, logEvent } from '../../analytics';
 
   export let user;
   export let auth;
@@ -23,7 +22,6 @@
       }
     }
     if (shouldPerformSignOut) {
-      logEvent(firebase, EVENT_LOGOUT);
       await cleanUpUser(db, userId);
       await auth.signOut();
       navitageWithLog(firebase, '/');

@@ -1,23 +1,16 @@
 <script>
   import { Collection } from 'sveltefire';
   import { getContext } from 'svelte';
-  import {
-    EVENT_HOST_REMOVE_PLAYER,
-    EVENT_HOST_START_GAME,
-    logEvent,
-  } from '../../analytics';
 
   export let gameRef;
 
   const firebase = getContext('firebase').getFirebase();
 
   const removePlayer = player => {
-    logEvent(firebase, EVENT_HOST_REMOVE_PLAYER);
     player.ref.delete();
   };
 
   const startGame = () => {
-    logEvent(firebase, EVENT_HOST_START_GAME);
     gameRef.update({ state: 'preQuestion' });
   }
 </script>

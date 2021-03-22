@@ -1,7 +1,6 @@
 <script>
   import { onDestroy, getContext } from 'svelte';
   import HostEndStep from './HostEndStep.svelte';
-  import { getEventFromState, logEvent } from '../../analytics';
 
   export let gameRef;
   export let numberOfSeconds = 5;
@@ -11,7 +10,6 @@
   const firebase = getContext('firebase').getFirebase();
 
   const changeState = () => {
-    logEvent(firebase, getEventFromState(nextState));
     gameRef.update({ state: nextState });
   };
 
