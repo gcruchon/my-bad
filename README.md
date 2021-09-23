@@ -8,6 +8,29 @@ Ce jeu vise à partager, au sein d'un équipe, les notions d'erreur, faute et é
 
 Le jeu est UP & Running à cette adresse (infra de test) : [https://my-bad-game.web.app/](https://my-bad-game.web.app/).
 
+## Développez
+
+### Configurer le projet pour le faire tourner localement
+
+```sh
+npm install
+cp src/config/firebaseConfig-sample.js src/config/firebaseConfig.js 
+```
+
+Dans le fichier `src/config/firebaseConfig.js`, mettre les bonnes valeurs pour les clés suivantes du projet.
+Pour cela:
+
+- Allez sur la console firebase
+- Sélectionnez votre projet
+- Cliquez sur "Paramètre du projet"
+- Dans "Paramètres généraux", rubrique "Vos applications", sous-rubrique "Installation et configuration du SDK", copier coller le code "JSON" correpondant à vos paramètres".
+
+### Installer le client firebase
+
+```sh
+brew install firebase-cli
+```
+
 ## Licence
 
 Ce jeu écrit par [Gilles CRUCHON](https://github.com/gcruchon/) est sous licence [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/)
