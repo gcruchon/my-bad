@@ -8,6 +8,7 @@ import copy from 'rollup-plugin-copy';
 import babel from '@rollup/plugin-babel';
 import bundleSize from 'rollup-plugin-bundle-size';
 import babelConfig from './rollup-babel-config';
+import css from 'rollup-plugin-css-only';
 import rimraf from 'rimraf';
 import { customAlphabet } from 'nanoid';
 // import { terser } from 'rollup-plugin-terser';
@@ -31,15 +32,15 @@ export default {
     }),
 
     svelte({
-      // enable run-time checks when not in production
-      dev: !production,
-      // we'll extract any component CSS out into
-      // a separate file — better for performance
-
-      css: css => {
-        css.write('bundle.css', !production);
+      compilerOptions: {
+        // enable run-time checks when not in production
+        dev: !production,
       },
     }),
+
+    // we'll extract any component CSS out into
+    // a separate file - better for performance
+    css({ output: 'bundle.css' }),
 
     // If you have external dependencies installed from
     // npm, you'll most likely need these plugins. In
@@ -84,18 +85,26 @@ export default {
 };
 
 function serve() {
-  let started = false;
+  let server;
+
+  function toExit() {
+    if (server) server.kill(0);
+  }
 
   return {
     writeBundle() {
-      if (!started) {
-        started = true;
-
-        require('child_process').spawn('npm', ['run', 'start', '--', '--dev'], {
+      if (server) return;
+      server = require('child_process').spawn(
+        'npm',
+        ['run', 'start', '--', '--dev'],
+        {
           stdio: ['ignore', 'inherit', 'inherit'],
           shell: true,
-        });
-      }
+        },
+      );
+
+      process.on('SIGTERM', toExit);
+      process.on('exit', toExit);
     },
   };
 }

@@ -7,7 +7,7 @@
   export let maxWait = 10000;
   export let once = false;
 
-  const isFinished = query.toString().includes('"==", "finished"');
+  const isFinished = query.toString().includes("'==', 'finished'");
   const games = isFinished ? [
     {
       shortId: 'FINISH01',

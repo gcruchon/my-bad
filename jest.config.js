@@ -5,6 +5,7 @@ module.exports = {
     '^.+\\.js$': 'babel-jest',
     '^.+\\.svelte$': 'svelte-jester',
   },
+  testEnvironment: 'jsdom',
   testPathIgnorePatterns: ['/node_modules/'],
   transformIgnorePatterns: [`/node_modules/(?!${esModules})`],
   moduleFileExtensions: ['js', 'json', 'svelte'],

@@ -11,10 +11,11 @@ const timerHtml = sec => `Timer : ${sec} sec.`;
 
 describe('HostCountDown', () => {
   beforeEach(() => {
-    jest.useFakeTimers();
+    jest.useFakeTimers('legacy');
   });
   afterEach(() => {
     gameRef.update.mockClear();
+    jest.useRealTimers('legacy');
   });
   it('should count down (Captain Obvious !)', async () => {
     const { container } = render(HostCountDown, {
