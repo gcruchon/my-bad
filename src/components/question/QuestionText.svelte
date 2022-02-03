@@ -1,6 +1,6 @@
 <script>
   import { Collection } from 'sveltefire';
-  import marked from 'marked';
+  import { marked } from 'marked';
   import DOMPurify from 'dompurify';
 
   export let game;
@@ -12,7 +12,7 @@
   const questionSetId = game.questionSetId || 'default';
 
   const mdToHtml = text => {
-    return DOMPurify.sanitize(marked(text.replace(/\\n/gi, '\n')));
+    return DOMPurify.sanitize(marked.parse(text.replace(/\\n/gi, '\n')));
   };
 </script>
 
