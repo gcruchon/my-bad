@@ -20,7 +20,7 @@ cp src/config/firebaseConfig-sample.js src/config/firebaseConfig.js
 Dans le fichier `src/config/firebaseConfig.js`, mettre les bonnes valeurs pour les clés suivantes du projet.
 Pour cela:
 
-- Allez sur la console firebase
+- Allez sur la [console firebase](https://console.firebase.google.com)
 - Sélectionnez votre projet
 - Cliquez sur "Paramètre du projet"
 - Dans "Paramètres généraux", rubrique "Vos applications", sous-rubrique "Installation et configuration du SDK", copier coller le code "JSON" correpondant à vos paramètres".
