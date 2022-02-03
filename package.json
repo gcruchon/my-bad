@@ -45,7 +45,7 @@
     "firebase": "^8.10.0",
     "firestore-jest-mock": "^0.17.0",
     "jest": "^27.2.1",
-    "marked": "^2.0.1",
+    "marked": "^4.0.10",
     "nanoid": "^3.1.22",
     "rimraf": "^3.0.2",
     "rollup": "^2.42.3",
